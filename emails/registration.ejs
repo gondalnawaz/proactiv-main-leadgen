@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmation Email</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      body {
+        font-family: "Raleway", Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .header {
+        text-align: center;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+      }
+      .content {
+        padding: 20px;
+      }
+      .footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Welcome to Proactiv Marketing</h1>
+      </div>
+      <div class="content">
+        <p>Hello Proactiv Marketers,</p>
+        <p>
+          <%= data.userData.fullname %> has done registration on your platform.
+        </p>
+        <p>Personal Information</p>
+        <ul>
+          <li>Name: <%= data.userData.fullname %></li>
+          <li>Email: <%= data.userData.email %></li>
+          <li>Phone Number: <%= data.userData.number %></li>
+          <li>Business Name: <%= data.userData.businessname %></li>
+          <li>Industry: <%= data.userData.industry %></li>
+          <li>
+            Website:
+            <a href="<%= data.userData.web %>"><%= data.userData.web %></a>
+          </li>
+          <li>Address: <%= data.userData.address %></li>
+          <li>Period Selected: <%= data.userData.periodselected %></li>
+          <li>Package Selected: <%= data.userData.packageselected %></li>
+        </ul>
+        <p>Cards Data</p>
+        <ul>
+          <li>Needed: <%= data.cardsData.needed %></li>
+          <li>Option: <%= data.cardsData.option %></li>
+          <li>Payment: <%= data.cardsData.payment %></li>
+          <li>TotalDue: <%= data.cardsData.totaldue %></li>
+        </ul>
+        <p>Software Data</p>
+        <ul>
+          <li>Date: <%= data.softwareData.date %></li>
+          <li>Days: <%= data.softwareData.days %></li>
+          <li>Description: <%= data.softwareData.description %></li>
+          <li>Number: <%= data.softwareData.number %></li>
+          <li>Valued: <%= data.softwareData.valued %></li>
+        </ul>
+        <p>Customers</p>
+        <ul>
+          <li>Customers: <%= data.customers %></li>
+        </ul>
+        <p>Key FOBS</p>
+        <ul>
+          <li>Customers: <%= data.keyFobData.customers %></li>
+          <li>Add Rings: <%= data.keyFobData.addrings %></li>
+          <li>Price: <%= data.keyFobData.price %></li>
+        </ul>
+        <p><strong>Order Summary</strong></p>
+        <ul>
+          <% for(let i = 0; i < data.orderSummary.length; i++) { %>
+          <li><%= data.orderSummary[i] %></li>
+          <% } %>
+          <li>Transaction Reference: <%= data.transactionReference %></li>
+        </ul>
+        <small><i>Please verify the payment.</i></small>
+      </div>
+      <div class="footer">
+        &copy; <%= new Date().getFullYear() %> Proactiv Marketing
+      </div>
+    </div>
+  </body>
+</html>

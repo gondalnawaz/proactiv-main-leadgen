@@ -1,0 +1,98 @@
+.containerCSS {
+    height: 350px;
+    width: 350px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 10px gray;
+    transition: 7s transform;
+}
+
+.containerDIV {
+    height: 50%;
+    width: 200px;
+    clip-path: polygon(100% 0, 50% 100%, 0 0);
+    transform: translateX(-50%);
+    transform-origin: bottom;
+    position: absolute;
+    left: 21%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 18px;
+    font-weight: 700;
+    writing-mode: vertical-rl;
+    padding-top: 15px;
+    line-height: 1;
+}
+
+.containerONE {
+    background: #ff7504;
+    left: 50%;
+    color: #000000;
+}
+
+.containerTWO {
+    background: #fbff0a;
+    transform: rotate(60deg);
+    color: #000000;
+}
+
+.containerTHREE {
+    background: #0e2cec;
+    transform: rotate(120deg);
+    color: #000000;
+}
+
+.containerFOUR {
+    background: #ff0000;
+    transform: rotate(180deg);
+    color: #000000;
+}
+
+.containerFIVE {
+    background: #00ff15;
+    transform: rotate(240deg);
+    color: #000000;
+}
+
+.containerSIX {
+    background: #e100ff;
+    transform: rotate(300deg);
+    color: #000000;
+}
+
+.mid {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    position: absolute;
+    background: #1b6146;
+}
+
+/* #spin {
+    height: 60px;
+    width: 200px;
+    background: #4ed4c6;
+    font-size: 30px;
+    color: white;
+    font-weight: 1000;
+    letter-spacing: 4px;
+    border: 1px solid white;
+    cursor: pointer;
+    box-shadow: 0 5px 10px gray;
+    transition: 0.2s all;
+} */
+
+#spin:hover {
+    box-shadow: none;
+}
+
+.stoper {
+    height: 30px;
+    width: 40px;
+    background: rgba(0, 255, 234, 0.842);
+    position: absolute;
+    clip-path: polygon(100% 0, 50% 100%, 0 0);
+    margin-top: -350px;
+}
