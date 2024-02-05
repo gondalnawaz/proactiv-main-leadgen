@@ -22,13 +22,14 @@ const axiosInstance = axios.create({
   // withCredentials: true
 });
 
+const connection = process.env.NEXT_PUBLIC_DB_CONNECTION.replace(/(\(dollar\))/g, '$');
 export async function POST(req: Request) {
   const sql = require('mssql');
   let errorMessage = '';
   try {
 
     const reqJson = await req.json();
-    await sql.connect(process.env.NEXT_PUBLIC_DB_CONNECTION);
+    await sql.connect(connection);
     try {
 
       const { customer, software, keyfobs, cards } = reqJson;
