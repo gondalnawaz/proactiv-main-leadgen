@@ -128,6 +128,13 @@ const Payment = () => {
         typeof window !== 'undefined' && localStorage.getItem('data')
           ? JSON.parse(localStorage.getItem('data'))
           : '';
+
+      const dateSplitted = softwaredata.date.split('-');
+      const dateUtc = new Date(
+        new Date(
+          `${dateSplitted[2]}/${dateSplitted[1]}/${dateSplitted[0]}`
+        ).toUTCString()
+      );
       const paymentResponse = await axios.post('/api/payment/card', {
         amountGBP: amountGBP,
         cardNumber: formData.cardNumber,
@@ -143,7 +150,7 @@ const Payment = () => {
         keyfobs: keyfobdata,
         software: {
           ...softwaredata,
-          dateUtc: new Date(new Date(softwaredata.date).toUTCString()),
+          dateUtc: dateUtc,
         },
         cards: cardsdata.baseData,
       });
