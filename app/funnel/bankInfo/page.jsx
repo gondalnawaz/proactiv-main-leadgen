@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
 
 // import CheckoutIntegrationSample from '@/app/components/CheckoutIntegrationSample'
 
@@ -292,6 +293,7 @@ const Payment = () => {
 
   return (
     <div className="bg-white h-[150vh] w-screen">
+      <PixelPageView />
       {/* <CheckoutIntegrationSample /> */}
       <Image
         src="/Proactiv Marketing Logo.jpg"

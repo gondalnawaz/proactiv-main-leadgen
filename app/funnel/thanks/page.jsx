@@ -2,6 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
+import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
 import style from './page.module.css';
 
 const Page = () => {
@@ -11,6 +12,7 @@ const Page = () => {
 
   return (
     <div className={`${style['root']} flex flex-col justify-center items-center min-h-screen`}>
+      <PixelPageView />
       <div className="flex flex-col mx-5 my-4 pb-2 items-center bg-white rounded-lg shadow-md relative pt-2 pl-3 pr-3">
         <div className={`${style['content']} flex items-center`}>
           <div className={`${style['image-wrapper']} pr-4`}>

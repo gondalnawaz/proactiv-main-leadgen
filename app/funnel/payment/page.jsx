@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSearchParams,useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
 
 const Payment = () => {
   const router = useRouter();
@@ -21,11 +22,11 @@ const Payment = () => {
     parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal) - deposit < 0
       ? 0
       : (
-          parseFloat(cTotal) +
-          parseFloat(kfTotal) +
-          parseFloat(srTotal) -
-          deposit
-        ).toFixed(2);
+        parseFloat(cTotal) +
+        parseFloat(kfTotal) +
+        parseFloat(srTotal) -
+        deposit
+      ).toFixed(2);
 
   useEffect(() => {
     let storageSoft = JSON.parse(localStorage.getItem("software"));
@@ -81,6 +82,7 @@ const Payment = () => {
 
   return (
     <div className="flex flex-col w-[95%] my-4 py-5 items-center bg-white rounded-lg shadow-md relative h-full md:w-[52%]">
+      <PixelPageView />
       <p
         className="fontTitle text-center"
         style={{ fontWeight: "700", color: "#4a6bb6", padding: "5px 0 20px 0" }}
