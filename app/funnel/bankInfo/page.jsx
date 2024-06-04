@@ -326,7 +326,7 @@ const Payment = () => {
                   {/* <div className="text-gray-700">£{deposit}</div> depositStatus */}
                   <div className="text-gray-700">
                     £
-                    {parseFloat(amountGBP).toFixed(2)}
+                    {parseFloat(amountGbpFromUrl).toFixed(2)}
                     {/* {depositStatus === 'true'
                       ? parseFloat(51.5).toFixed(2)
                       : parseFloat(amountGBP).toFixed(2)} */}
@@ -512,7 +512,7 @@ const Payment = () => {
           acceptance of worldPay privacy policy
         </div>
         <div className="text-center mt-5 font-bold">
-          @ 2013-2023 . All rights reserved
+          @ 2013-2024 . All rights reserved
         </div>
       </div>
     </div>

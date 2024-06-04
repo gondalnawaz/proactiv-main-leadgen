@@ -4,7 +4,7 @@
     position: relative;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 10px gray;
+    box-shadow: 0 0 40px gray;
     transition: 7s transform;
 }
 
@@ -24,40 +24,42 @@
     writing-mode: vertical-rl;
     padding-top: 15px;
     line-height: 1;
+   
 }
 
 .containerONE {
-    background: #ff7504;
+    background: #e100ff;
     left: 50%;
     color: #000000;
+  
 }
 
 .containerTWO {
-    background: #fbff0a;
+    background:  #00ff15;
     transform: rotate(60deg);
     color: #000000;
 }
 
 .containerTHREE {
-    background: #0e2cec;
+    background:  #e100ff;
     transform: rotate(120deg);
     color: #000000;
 }
 
 .containerFOUR {
-    background: #ff0000;
+    background: #00ff15;
     transform: rotate(180deg);
     color: #000000;
 }
 
 .containerFIVE {
-    background: #00ff15;
+    background: #e100ff;
     transform: rotate(240deg);
     color: #000000;
 }
 
 .containerSIX {
-    background: #e100ff;
+    background:  #ff7504;
     transform: rotate(300deg);
     color: #000000;
 }

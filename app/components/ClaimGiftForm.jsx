@@ -35,25 +35,59 @@ const ClaimGiftForm = () => {
       router.push('/funnel/spin');
     }
   }
-  const [resetLoading, setResetLoading] = useState(false);
-  const resetSpin = () => {
-    setResetLoading(true)
-    localStorage.setItem('click', JSON.stringify('no'));
-    try {
-      window.location.reload();
-    } catch (e) {
-      console.error(e)
-    }
-  };
+  // const [resetLoading, setResetLoading] = useState(false);
+  // const resetSpin = () => {
+  //   setResetLoading(true)
+  //   localStorage.setItem('click', JSON.stringify('no'));
+  //   try {
+  //     window.location.reload();
+  //   } catch (e) {
+  //     console.error(e)
+  //   }
+  // };
   return (
+    <>
     <div className="flex justify-center items-center min-h-screen md:w-[55%]">
-      <form id="formulario" className="flex flex-col px-4 py-8 mx-5 bg-white rounded-lg shadow-md relative">
-        {/* <p className="fontAlternative"> <span className="fontTitle" style={{ padding: "0"} }>FREE</span> to 100 Salon Owners - Value up to £653</p>
-        <p className="fontTitle">Claim Your FREE Gift Today!</p>         */}
-        <p className="fontAlternative" > <span className="fontTitle" style={{ padding: "0", marginBottom: "10px", marginTop: "20px" }}>Calling All Salon Owners</span> <br></br> <br></br> Increase The Numbers Of New Customers You Attract Through</p>
+      <form
+        id="formulario"
+        className="flex flex-col px-8 py-8 my-2 bg-white rounded-lg shadow-md relative "
+      >
+        <p className="fontAlternative">
+          {" "}
+          <span
+            className="fontTitle"
+            style={{
+              padding: "0",
+              fontWeight: "bold",
+              marginBottom: "10px",
+              marginTop: "20px",
+            }}
+          >
+            Calling All Salon Owners
+          </span>{" "}
+        </p>
+        <p className="font-bold text-[1.25rem] text-center">
+          {" "}
+          Dramatically Increase The Number Of New Clients
+        </p>
+        <p className="font-bold text-[1.25rem] text-center">
+          {" "}
+          You Attract (For FREE) Through
+        </p>
 
-        <p className="fontAlternative"> <span className="fontTitle" style={{ padding: "0", fontWeight: "bold" }}>Word Of Mouth</span></p>
-        <p className="fontTitle" style={{ color: "#4a6bb6", fontWeight: "bold" }}>By Over 1000% INCREASE Guaranteed</p>
+        <p className="fontAlternative alternative-font-title-fix">
+          {" "}
+          <span
+            className="fontTitle"
+            style={{ padding: "0", fontWeight: "bold" }}
+          >
+            Word Of Mouth
+          </span>
+        </p>
+        <p className="font-bold text-[1.25rem] text-center underline mb-3">
+          Guaranteed
+        </p>
+
         <input
           type="text"
           name="fullname"
@@ -64,9 +98,6 @@ const ClaimGiftForm = () => {
           className="px-4 py-2 mb-4 rounded-lg border border-gray-300 focusInput "
         />
 
-        {/* <label for="Business Name" className="fontForm mb-1">
-          Business Name*
-        </label>  */}
         <input
           type="text"
           name="businessname"
@@ -77,9 +108,6 @@ const ClaimGiftForm = () => {
           className="px-4 py-2 mb-4 rounded-lg border border-gray-300 focusInput"
         />
 
-        {/* <label for="Email" className="fontForm mb-1">
-          Email*
-        </label>          */}
         <input
           type="email"
           name="email"
@@ -90,11 +118,6 @@ const ClaimGiftForm = () => {
           className="px-4 py-2 mb-4 rounded-lg border border-gray-300 focusInput"
         />
 
-
-
-        {/* <label for="Contact Number" className="fontForm mb-1">
-          Contact Number*
-        </label>           */}
         <input
           type="tel"
           name="number"
@@ -104,23 +127,17 @@ const ClaimGiftForm = () => {
           required
           className="px-4 py-2 mb-4 rounded-lg border border-gray-300 focusInput"
         />
+
         <button
           type="submit"
-          className="px-4 !py-2 rounded-md buttonsMain h-11"
+          className="px-4 py-2 buttonsMain"
           onClick={handleClick}
         >
-          Click to claim your FREE gift
+          Click To Claim Your FREE Gift
         </button>
-        <div className="text-center">
-          <button
-            className="bg-gray-100 mt-2 text-slate-800 px-4 py-1 rounded-md mx-auto h-11"
-            onClick={resetSpin}
-            type="button">
-            {resetLoading ? "Please wait ..." : "Reset Spin"}
-          </button>
-        </div>
       </form>
     </div>
+  </>
   )
 }
 

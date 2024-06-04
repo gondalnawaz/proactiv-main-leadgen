@@ -177,7 +177,7 @@ const Checkout = () => {
       if (cardsdata.option == 'full payment') {
         setCtotal(cardsdata.totaldue.toFixed(2).replace(',', '.'));
       } else {
-        setCtotal(cardsdata.payment.toFixed(2).replace(',', '.'));
+        setCtotal(cardsdata.totaldue.toFixed(2).replace(',', '.'));
       }
     }
   }, [cardsdata]);
@@ -203,8 +203,10 @@ const Checkout = () => {
   }, [keyfobdata]);
 
   useEffect(() => {
-    setDeposit(parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal));
+    setDeposit( depositSubtraction ? cardsdata.payment.toFixed(2).replace(',', '.'):(parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal)));
   }, [cTotal, kfTotal, srTotal]);
+
+
   useEffect(() => {
     const search = searchParams.get('deposit');
     if (search === 'true') {
@@ -373,7 +375,7 @@ const Checkout = () => {
             <input
               type="text"
               name="deposit"
-              value={`${depositSubtraction ? parseFloat(51.50).toFixed(2) : deposit}`}
+              value={`${deposit}`}
               onChange={handleDeposit}
               className=" outline-none max-w-[60px]"
             />

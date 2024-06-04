@@ -31,7 +31,7 @@ const Celebration = ({ result }) => {
             localStorage.setItem('software', JSON.stringify(result));
             router.push('/funnel/software');
 
-        }, 5000);
+        }, 10000);
 
         return () => clearTimeout(timer); // Clean up the timer on component unmount
 

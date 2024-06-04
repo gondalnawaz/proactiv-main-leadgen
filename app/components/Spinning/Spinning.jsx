@@ -147,76 +147,296 @@ export const Spinning = ({ setCongrats, setResult }) => {
         {/* <p className="fontTitle">Spin The Wheel</p> */}
         {/* <p className="fontSubTitle whitespace-nowrap">To See How Many Free Months Use You Get</p>          */}
         <p className='fontTitle' style={{ paddingBottom: "0", fontWeight: '600' }}>Spin The Wheel</p>
-        <p className="fontAlternative" style={{ paddingTop: "0.5rem", fontSize: "1.2rem", textAlign: 'justify' }}> To See How Many Free Months Use Of The Software You Win To Go With Your <span className='font-bold text-[#ff0000]'>100 FREE</span>  Plastic Referral Marketing Cards <span className='italic' style={{ fontSize: '0.8rem' }}>[total value up to £653]</span></p>
+        
+        <p className="font-semibold text-[1.2rem] px-4 mt-2 text-[#4a6bb6]">
+          To See How Many{" "}
+          <span className="text-[#a62b2b] text-[1.5rem]"> Free </span>Months Use
+          Of The ‘Proactiv Privileges’ Business Management Software You Win. To
+          Go With Your 100{" "}
+          <span className="text-[#a62b2b] text-[1.5rem]"> Free </span> Plastic
+          Referral Marketing Cards.
+          <br />
+          <span className="text-[1rem] italic">(total value up to £653) </span>
+        </p>
 
-
-        <div id='DIVsoftwarecomponents' className='flex flex-col justify-center items-center w-[90%] rounded-lg shadow-lg pb-2 mb-3 bg-[#ebebeb86]'>
-          <p className="fontSubTitle" style={{ paddingBottom: '0.2rem' }}>Software Components</p>
-          <ul className="fontGeneral">
-            <li className=" flex justify-around items-center h-fit border-2 border-[#a52a2a49] py-1">
-              <div className=' w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>1.-</p>
-                <p className='fontGeneral w-[100%]' style={{ textAlign: 'start', padding: '0 0 0 0' }}> Database</p>
+        <div
+          id="DIVsoftwarecomponents"
+          className="flex flex-col justify-center items-center w-[90%] rounded-lg shadow-lg pb-2 mb-3 bg-[#ebebeb86]"
+          style={{ backgroundColor: "#243D8F" }}
+        >
+          <p
+            className="fontSubTitle"
+            style={{
+              paddingBottom: "0.2rem",
+              marginBottom: "20px",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            Software Components
+          </p>
+          <ul className="fontGeneral" style={{ marginBottom: "20px" }}>
+            <li className="flex justify-around items-center h-fit border-2 border-[#ffcf31] py-1">
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  1.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%]"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  {" "}
+                  Database
+                </p>
               </div>
-              <span className='w-[2px] h-[30px] bg-[#a52a2a49]'></span>
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>2.-</p>
-                <p className='fontGeneral w-[100%]' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Telephone / Email Marketing</p>
+              <span className="w-[2px] h-[30px] bg-[#ffcf31]"></span>
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  2.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%]"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Telephone / Email Marketing
+                </p>
               </div>
             </li>
-
-            <li className=" flex justify-around items-center h-fit border-2 border-[#a52a2a49] py-1">
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>3.-</p>
-                <p className='fontGeneral w-[100%] text-center' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Referral Marketing</p>
+            <li className="flex justify-around items-center h-fit border-2 border-[#ffcf31] py-1">
+              {/* Component 3 */}
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  3.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%] text-center"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Referral Marketing
+                </p>
               </div>
-              <span className='w-[2px] h-[30px] bg-[#a52a2a49]'></span>
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>4.-</p>
-                <p className='fontGeneral w-[100%]' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Gift Cards</p>
+              <span className="w-[2px] h-[30px] bg-[#ffcf31]"></span>
+              {/* Component 4 */}
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  4.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%]"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Gift Cards
+                </p>
               </div>
             </li>
-
-            <li className=" flex justify-around items-center h-fit border-2 border-[#a52a2a49] py-1">
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>5.-</p>
-                <p className='fontGeneral w-[100%] text-center' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Loyalty / Incentive Marketing</p>
+            <li className="flex justify-around items-center h-fit border-2 border-[#ffcf31] py-1">
+              {/* Component 5 */}
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  5.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%] text-center"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Loyalty / Incentive Marketing
+                </p>
               </div>
-              <span className='w-[2px] h-[30px] bg-[#a52a2a49]'></span>
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>6.-</p>
-                <p className='fontGeneral w-[100%]' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Diary System</p>
+              <span className="w-[2px] h-[30px] bg-[#ffcf31]"></span>
+              {/* Component 6 */}
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  6.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%]"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Diary System
+                </p>
               </div>
             </li>
-
-
-            <li className=" flex justify-around items-center h-fit border-2 border-[#a52a2a49] py-1">
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>7.-</p>
-                <p className='fontGeneral w-[100%] text-center' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Stock Control</p>
+            <li className="flex justify-around items-center h-fit border-2 border-[#ffcf31] py-1">
+              {/* Component 7 */}
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  7.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%] text-center"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Stock Control
+                </p>
               </div>
-              <span className='w-[2px] h-[30px] bg-[#a52a2a49]'></span>
-              <div className='w-[95%] h-[100%] flex justify-center items-center'>
-                <p className='fontGeneral' style={{ textAlign: 'start', padding: '0 4px 0 2px' }}>8.-</p>
-                <p className='fontGeneral w-[100%]' style={{ textAlign: 'start', padding: '0 0 0 0' }}>Invoicing </p>
+              <span className="w-[2px] h-[30px] bg-[#ffcf31]"></span>
+              {/* Component 8 */}
+              <div className="w-[95%] h-[100%] flex justify-center items-center">
+                <p
+                  className="fontGeneral"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 4px 0 2px",
+                    color: "whitesmoke",
+                  }}
+                >
+                  8.-
+                </p>
+                <p
+                  className="fontGeneral w-[100%]"
+                  style={{
+                    textAlign: "start",
+                    padding: "0 0 0 0",
+                    color: "whitesmoke",
+                  }}
+                >
+                  Invoicing
+                </p>
               </div>
             </li>
           </ul>
         </div>
 
 
-        <div id='containerSpinner' className='h-auto w-[95%] flex flex-col justify-center items-center transform scale-[0.9]'>
-          {/* <p>test: {prize}</p> */}
-          <div className='flex justify-center items-center my-7 px-2 transform scale-100'>
-            <div class="containerCSS" style={{ transform: `rotate(${deg}deg)` }}>
-              {/* <div class={`containerCSS rotate-[${deg}deg]`}> */}
-              <div class="containerDIV containerONE"><div className='text-center w-[42px] h-[115px]'> 3 Months <p className='inline w-fit pt-3'>FREE</p></div></div>
-              <div class="containerDIV containerTWO"><div className='text-center w-[42px] h-[115px]'> 3M FREE + 3M <p className='text-sm inline'>1/2</p> price </div></div>
-              <div class="containerDIV containerTHREE"><div className='text-center w-[42px] h-[115px]'>6 Months <p className='inline w-fit pt-3'>FREE</p> </div></div>
-              <div class="containerDIV containerFOUR"><div className='text-center w-[42px] h-[115px]'>6M FREE + 6M <p className='text-sm inline'>1/2</p>  price</div></div>
-              <div class="containerDIV containerFIVE"><div className='text-center w-[42px] h-[115px]'>9 Months <p className='inline w-fit pt-3'>FREE</p></div></div>
-              <div class="containerDIV containerSIX"><div className='text-center w-[42px] h-[115px]'>12 Months <p className='inline w-fit pt-4'>FREE</p></div></div>
+        <div
+          id="containerSpinner"
+          className="h-auto w-[95%] flex flex-col justify-center items-center transform scale-[0.9]"
+        >
+          <div className="flex justify-center items-center my-7 px-2 transform scale-100">
+            <div
+              class="containerCSS"
+              style={{ transform: `rotate(${deg}deg)` }}
+            >
+              <div
+                class="containerDIV containerONE"
+                style={{ fontSize: "16px" }}
+              >
+                <div className="text-center w-[15px] h-[118px]">
+                  1 Month <span className="text-white">Free</span>
+                </div>
+              </div>
+
+              <div
+                className="containerDIV containerFOUR"
+                style={{ fontSize: "16px" }}
+              >
+                <div className="text-center w-[15px] h-[118px]">
+                  2 Months <span className="text-[#ff0000]">Free</span>
+                </div>
+              </div>
+              <div
+                class="containerDIV containerSIX"
+                style={{ fontSize: "16px" }}
+              >
+                <div className="text-center w-[30px] h-[118px]">
+                  3 Months <span className="text-white">Free</span>
+                </div>
+              </div>
+              <div
+                class="containerDIV containerTWO"
+                style={{ fontSize: "16px" }}
+              >
+                <div className="text-center w-[15px] h-[118px]">
+                  2 Month <span className="text-[#ff0000]">Free</span>
+                </div>
+              </div>
+              <div
+                class="containerDIV containerTHREE"
+                style={{ fontSize: "16px" }}
+              >
+                <div className="text-center w-[15px] h-[118px]">
+                  1 Month <span className="text-white">Free</span>
+                </div>
+              </div>
+              <div
+                class="containerDIV containerFIVE"
+                style={{ fontSize: "16px" }}
+              >
+                <div className="text-center w-[15px] h-[118px]">
+                  1 Month <span className="text-white">Free</span>
+                </div>
+              </div>
             </div>
+            <span class="mid"></span>
+            <div class="stoper"></div>
+
             <span class="mid"></span>
             <div class="stoper"></div>
           </div>
