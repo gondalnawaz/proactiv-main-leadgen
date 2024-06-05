@@ -1,10 +1,18 @@
 "use client";
-import React, { useRef } from 'react'
+import React, {useState, useEffect, useRef } from 'react'
 
 
 const KeyFobsTestimonials = () => {
 
-    const videoRef = useRef(null);
+    const videoRef= useRef();
+    const [playbackRate] = useState(1.4);
+  
+    useEffect(() => {
+       videoRef.current.playbackRate = playbackRate;
+    }, [playbackRate]);
+
+    
+  
   return (
 
     <div className="flex flex-col items-center bg-white rounded-lg shadow-md w-[90%] md:w-[52%]">
@@ -96,11 +104,10 @@ const KeyFobsTestimonials = () => {
 
         </div>
 
-        <video   ref={videoRef} controls className="w-[80vw] pb-10 rounded-md md:w-[45%]" poster={""}>
+        <video ref={videoRef}  controls className="w-[80vw] pb-10 rounded-md md:w-[45%]" poster={""}>
                 <source src={'https://res.cloudinary.com/dbdkbwkhr/video/upload/v1717535671/vbqizfc4w3dmovbuuwys.mp4'} type="video/mp4" />
                 Your browser does not support the video tag.
         </video>
-
     </div>
 
 
