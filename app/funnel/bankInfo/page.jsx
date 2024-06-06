@@ -510,8 +510,7 @@ const Payment = () => {
           </tbody>
         </table>
         <div className="text-center mt-5 ">
-          When you submit you trasanction process by Worldpay, You confirm your
-          acceptance of WorldPay privacy policy.
+        When you submit you transaction process by Worldpay, you confirm your acceptance of WorldPay privacy policy.
         </div>
         <div className="text-center mt-5 font-bold">
           @ 2013-2024 . All rights reserved
