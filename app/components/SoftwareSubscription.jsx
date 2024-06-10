@@ -31,7 +31,7 @@ const SoftwareSubscription = () => {
       setData({...data, fullname:'none',businessname:'none',email:'none',number:'none',industry:'none',web:'none',address:'none',periodselested:'', packageselected:''})
       // console.log('entro a if falso');
     }else{
-      setData({...data, fullname: dataStored.fullname , businessname: dataStored.businessname, email: dataStored.email, number: dataStored.number})
+      setData({...data, fullname: dataStored.fullname , businessname: dataStored.businessname, email: dataStored.email, number: dataStored.number, reference: dataStored.reference})
       // console.log('entro a if correcto');
       // console.log(dataStored.fullname);
     }    

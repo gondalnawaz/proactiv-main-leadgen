@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useRouter } from 'next/navigation';
 
 const ClaimGiftForm = () => {
-  const [data, setData] = useState({ fullname: '', businessname: '', email: '', number: '' })
+  const [data, setData] = useState({ fullname: '', businessname: '', email: '', number: '',reference: "", })
 
   const router = useRouter();
 
@@ -63,7 +63,7 @@ const ClaimGiftForm = () => {
               marginTop: "20px",
             }}
           >
-            Calling All Salon Owners
+            Calling All INDEPENDENT BUSINESS OWNERS
           </span>{" "}
         </p>
         <p className="font-bold text-[1.25rem] text-center">
@@ -127,6 +127,15 @@ const ClaimGiftForm = () => {
           required
           className="px-4 py-2 mb-4 rounded-lg border border-gray-300 focusInput"
         />
+
+        <input
+            type="text"
+            name="reference"
+            value={data.reference}
+            onChange={handleChange}
+            placeholder="Reference"
+            className="px-4 py-2 mb-4 rounded-lg border border-gray-300 focusInput"
+          />
 
         <button
           type="submit"

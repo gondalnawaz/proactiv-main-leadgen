@@ -8,7 +8,7 @@ const ReferalMktText = () => {
       <p className="fontTitle" style={{fontWeight:'700'}}>Watch This Video To Learn How To Attract Lots Of New Clients For FREE</p>
 
       <video controls className="w-[80vw] rounded-md md:w-[45%]" poster={"https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673384/pos_w900d9_nbqd0l.png"}>
-        <source src={'https://res.cloudinary.com/dbew7ibhf/video/upload/v1688673403/VIDEO_2_FINAL_v4_1_ithsyz_awzd2b.mp4'} type="video/mp4" />
+        <source src={'https://res.cloudinary.com/dbdkbwkhr/video/upload/v1718051483/ffvsfkjlndbgoisvwyaz.mp4'} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="h-[20px]"></div>

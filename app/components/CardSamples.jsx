@@ -25,8 +25,10 @@ const CardSamples = () => {
                 <img className="w-[150px] h-[150px] overflow-hidden pb-3 rounded-lg samples-zoomable-imageLeft" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673385/Sin_t%C3%ADtulo-1_Mesa_de_trabajo_1_copia_hra8f5_nj0tcd.png" alt="" /> 
                 <img className="w-[150px] h-[150px] overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688675362/CS7_lgs3ja_koutr4.jpg" alt="" />
  */}
-
-<Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673385/Sin_t%C3%ADtulo-1_Mesa_de_trabajo_1_copia_2_fhirv3_gqmrdh.png" alt="" width={215} height={120} />
+                    <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057922/ewfdakbxuxlw66gteoin.png" alt="" width={215} height={120} />
+                    <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057931/x6lftx6lchpclv6ksp1o.png" alt="" width={215} height={120} />
+                    <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057932/igumamxkowessuhnmjh8.png" alt="" width={215} height={120} />
+                    <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673385/Sin_t%C3%ADtulo-1_Mesa_de_trabajo_1_copia_2_fhirv3_gqmrdh.png" alt="" width={215} height={120} />
                     <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673384/CS4_oaeyvy_q8rk8u.jpg" alt="" width={215} height={120} />
                     <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageLeft" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673385/Sin_t%C3%ADtulo-1_Mesa_de_trabajo_1_copia_3_amaojv_yros80.png" alt="" width={215} height={120} />
                     <Image className="overflow-hidden pb-3 rounded-lg samples-zoomable-imageRight" src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673384/CS5_vgxtcv_jxgqmp.png" alt="" width={220} height={120} />

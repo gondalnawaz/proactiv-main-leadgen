@@ -13,9 +13,42 @@ const CardsTestimonials = () => {
                 <span id="item-2"></span>
                 <span id="item-3"></span>
                 <span id="item-4"></span>
+                <span id="item-5"></span>
                 {/* <span id="item-5"></span> */}
-                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-1 shadow-lg bg-[#d6d6d665]">
-                <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673383/BENTLEYS_Mesa_de_trabajo_1_wzvoxb_iwnti9.png" alt="" />
+
+
+                 {/* ITEM OPEN */}
+                 <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-1 shadow-lg bg-[#d6d6d665]">
+                    <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057056/lxpjkdd67s5awvy5cp7s.png" alt="" />
+                    <div className="flex flex-col justify-between items-center gap-2 mt-2">
+                        <p className="fontGeneral">
+                            &quot;
+                            Our customers always comment on how good the appointment cards look. They are excellent value for money. We have saved lots on printing costs since we introduced them.
+                            &quot;
+                        </p>
+                    </div>
+                    <a className="arrow arrow-prev" href="#item-6"></a>
+                    <a className="arrow arrow-next" href="#item-2"></a>
+                </div>
+                {/* ITEM CLOSE */}
+
+                {/* ITEM OPEN */}
+                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-2 shadow-lg bg-[#d6d6d665]">
+                <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057137/b8tjzequb0nyywruicu3.png" alt="" />
+                    <div className="flex flex-col justify-between items-center gap-2 mt-2">
+                        <p className="fontGeneral">
+                            &quot;
+                            We can't recommend Proactiv highly enough for the effect they've had on our business! We started out a year ago and found that we were really struggling to keep hold of customers. - Some would come in once and we wouldn't see them again. We introduced the Privileges software and with a lot of advice from the guys at Proactiv, we started using loyalty and reward schemes. The difference was unbelievable! Once people could redeem rewards for returning to us, we saw the same people coming back week on week! The increase in spend paid for our annual software subscription within the first month. We use the plastic key fobs with the barcode. It is very simple to use. I am not very technical so I was grateful for that. We really can't thank Proactiv enough for their help & support.
+                            &quot;
+                        </p>
+                    </div>
+                    <a className="arrow arrow-prev" href="#item-1"></a>
+                    <a className="arrow arrow-next" href="#item-3"></a>
+                </div>
+                {/* ITEM CLOSE */}
+
+                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-3 shadow-lg bg-[#d6d6d665]">
+                    <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057509/zdcav46rertop4ahfxy9.png" alt="" />
                     <div className="flex flex-col justify-between items-center gap-2">
                         <p className="fontGeneral">
                             &quot;
@@ -24,74 +57,58 @@ const CardsTestimonials = () => {
                         </p>
                     </div>
 
-                    <a className="arrow arrow-prev" href="#item-4"></a>
-                    <a className="arrow arrow-next" href="#item-2"></a>
-                </div>
-                
-                {/* <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-2 shadow-lg bg-[#d6d6d665]">
-                    <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbhtt5ozr/image/upload/v1682116457/samples/cloudinary-logo-vector.svg" alt="" />
-                    <div className="flex flex-col justify-between items-center gap-2">
-                        <p className="fontSubTitle">Black Rose</p>
-                        <p className="fontGeneral">
-                            &quot;
-                            Customers are definitely keeping hold of their plastic cards. With my old cardboard ones they use to lose them all the time. I was constantly having to replacing them. They are a no brainer.
-                            &quot;
-                        </p>
-                    </div>
-
-                    <a className="arrow arrow-prev" href="#item-1"></a>
-                    <a className="arrow arrow-next" href="#item-3"></a>
-                </div> */}
-                
-                {/* ITEM OPEN */}
-                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-2 shadow-lg bg-[#d6d6d665]">
-                <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673385/scco-1_Mesa_de_trabajo_1_copia_jcyesi_dtrv5l.png" alt="" />
-
-                    <div className="flex flex-col justify-between items-center gap-2 mt-2">
-                        <p className="fontGeneral">
-                            &quot;
-                            Our customers always comment on how good the appointment cards look. They are excellent value for money. We have saved lots on printing costs since we introduced them.
-                            &quot;
-                        </p>
-                    </div>
-                    <a className="arrow arrow-prev" href="#item-1"></a>
-                    <a className="arrow arrow-next" href="#item-3"></a>
-                </div>
-                {/* ITEM CLOSE */}
-
-                {/* ITEM OPEN */}
-                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-3 shadow-lg bg-[#d6d6d665]">
-                <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673386/The_Salon_SL_11_-02_p8vdyu_kvvkrl.png" alt="" />
-
-                    <div className="flex flex-col justify-between items-center gap-2">
-                        <p className="fontGeneral">
-                            &quot;
-                            People are bringing their cards back. Our issue with customers forgetting their appointments is now a thing of the past.
-                            &quot;
-                        </p>
-                    </div>
                     <a className="arrow arrow-prev" href="#item-2"></a>
                     <a className="arrow arrow-next" href="#item-4"></a>
                 </div>
-                {/* ITEM CLOSE */}
 
 
                 {/* ITEM OPEN */}
                 <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-4 shadow-lg bg-[#d6d6d665]">
-                    <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673385/Sinsssaaaa_t%C3%ADtulo-1-03_j4n92h_qwnn0q.png" alt="" />
+                <p style={{fontSize: '45px', fontWeight: 'bold'}}>Blyth Garage</p>
                     <div className="flex flex-col justify-between items-center gap-2">
                         <p className="fontGeneral">
                             &quot;
-                            We are finding customers are now bringing their cards in so they are working very well for us.
+                            We don’t do any advertising. We rely purely on word of mouth. We give everyone of our customers a couple of cards. Many get passed on, leading to a regular impact of new customers. Without doubt a fantastic investment.
                             &quot;
                         </p>
                     </div>
                     <a className="arrow arrow-prev" href="#item-3"></a>
-                    <a className="arrow arrow-next" href="#item-1"></a>
+                    <a className="arrow arrow-next" href="#item-5"></a>
                 </div>
                 {/* ITEM CLOSE */}
 
+                {/* ITEM OPEN */}
+                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-5 shadow-lg bg-[#d6d6d665]">
+                    <img className="rounded-lg" style={{height:'5rem' , marginBottom: '10px'}} src="https://res.cloudinary.com/dbdkbwkhr/image/upload/v1718057211/bcbntfgp2vz532uubsqa.png" alt="" />
+                    <div className="flex flex-col justify-between items-center gap-2">
+                        <p className="fontGeneral">
+                            &quot;
+                            From start to finish the process was well managed and the customer service received enabled us to have a design we were extremely happy with.
 
+                            The product arrived in good time and we were informed along the way. The quality of the cards are great and have already proved to be a hit making access to our platforms easy for our customers. Will certainly be back for more in the future. Thanks Guys!
+                            &quot;
+                        </p>
+                    </div>
+                    <a className="arrow arrow-prev" href="#item-4"></a>
+                    <a className="arrow arrow-next" href="#item-6"></a>
+                </div>
+                {/* ITEM CLOSE */}
+
+                {/* ITEM OPEN */}
+                <div className="flex flex-col justify-center h-[70vh] items-center carousel-item rounded-lg item-6 shadow-lg bg-[#d6d6d665]">
+                <p style={{fontSize: '45px', fontWeight: 'bold'}}>Julia Dodd</p>
+                    <div className="flex flex-col justify-between items-center gap-2">
+                        <p className="fontGeneral">
+                            &quot;
+                            We have just re ordered business cards as we have found they are good quality, very handy to carry around as they don't bend as they are plastic.
+                            We chose the option of a QR code on our recent order which goes straight to our website / offer. It is definitely helping increase business. We found the company very helpful & we would definitely recommend them.
+                            &quot;
+                        </p>
+                    </div>
+                    <a className="arrow arrow-prev" href="#item-5"></a>
+                    <a className="arrow arrow-next" href="#item-1"></a>
+                </div>
+                {/* ITEM CLOSE */}
 
             </div>
 
