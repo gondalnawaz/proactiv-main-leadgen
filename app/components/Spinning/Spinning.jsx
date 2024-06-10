@@ -389,7 +389,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  1 Month <span className="text-white">Free</span>
+                3 Months <span className="text-white">Free</span>
                 </div>
               </div>
 
@@ -398,7 +398,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  2 Months <span className="text-[#ff0000]">Free</span>
+                3M FREE + 3M <span className="text-[#ff0000]">1/2</span>
                 </div>
               </div>
               <div
@@ -406,7 +406,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[30px] h-[118px]">
-                  3 Months <span className="text-white">Free</span>
+                6 Months <span className="text-white">Free</span>
                 </div>
               </div>
               <div
@@ -414,7 +414,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  2 Month <span className="text-[#ff0000]">Free</span>
+                6M FREE + 6M <span className="text-[#ff0000]">1/2</span>
                 </div>
               </div>
               <div
@@ -422,7 +422,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  1 Month <span className="text-white">Free</span>
+                9 Months <span className="text-white">Free</span>
                 </div>
               </div>
               <div
@@ -430,7 +430,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  1 Month <span className="text-white">Free</span>
+                12 Months <span className="text-white">Free</span>
                 </div>
               </div>
             </div>
