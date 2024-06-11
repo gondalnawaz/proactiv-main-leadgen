@@ -9,17 +9,16 @@ import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
 // import CheckoutIntegrationSample from '@/app/components/CheckoutIntegrationSample'
 
 const Payment = () => {
+  const [address, setaddress] = useState('');
   const [{
     deposit,
     depositValue,
     selectedPackage,
-    address,
     fullname,
   }, setInfo] = useState({
     deposit: '',
     depositValue: '',
     selectedPackage: '',
-    address: '',
     fullname: '',
   });
   const [loading, setLoading] = useState(false);
@@ -77,9 +76,9 @@ const Payment = () => {
       deposit,
       depositValue,
       selectedPackage,
-      address,
       fullname,
-    })
+    });
+    setaddress(address);
 
   }, []);
 
@@ -274,6 +273,7 @@ const Payment = () => {
       })
     );
     setEditingAddress(false);
+    setaddress(editedAddress);
   };
 
   const handleAddressChange = (e) => {
@@ -398,6 +398,7 @@ const Payment = () => {
                       <input
                         type="text"
                         name="month"
+                        maxLength={2}
                         value={formData.month}
                         onChange={handleInputChange}
                         className="w-12 rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
@@ -406,6 +407,7 @@ const Payment = () => {
                       <input
                         type="text"
                         name="year"
+                        maxLength={2}
                         value={formData.year}
                         onChange={handleInputChange}
                         className="w-12 rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
@@ -508,8 +510,7 @@ const Payment = () => {
           </tbody>
         </table>
         <div className="text-center mt-5 ">
-          When you submit you trasanction process by worldpay You confirm your
-          acceptance of worldPay privacy policy
+        When you submit you transaction process by Worldpay, you confirm your acceptance of WorldPay privacy policy.
         </div>
         <div className="text-center mt-5 font-bold">
           @ 2013-2024 . All rights reserved
