@@ -5,7 +5,7 @@ import React, {useState, useEffect, useRef } from 'react'
 const KeyFobsTestimonials = () => {
 
     const videoRef= useRef();
-    const [playbackRate] = useState(1.4);
+    const [playbackRate] = useState(2);
   
     useEffect(() => {
        videoRef.current.playbackRate = playbackRate;
