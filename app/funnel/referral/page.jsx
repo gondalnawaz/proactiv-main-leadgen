@@ -8,6 +8,7 @@ import CardsTestimonials from '@/app/components/CardsTestimonials'
 import SoftwareForYou from '@/app/components/SoftwareForYou'
 import ArtworkDelivery from '@/app/components/ArtworkDelivery.jsx'
 import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
+import GetFreeCard from '@/app/components/GetFreeCard.jsx'
 
 
 const FunnelReferal = () => {
@@ -41,15 +42,12 @@ const FunnelReferal = () => {
   return (
     <>
  
-      <PixelPageView />
+ <PixelPageView />
       <ReferalMktText />
       {/* <span className="w-full h-[1.25rem] block"></span> */}
 
-      <ReferalMktDiagram />
-      {/* <span className="w-full h-[1.25rem] block"></span> */}
-
-      <Faqs />
-      {/* <span className="w-full h-[1.25rem] block"></span> */}
+      <GetFreeCard />
+      {/* <span className="w-full h-[1.25rem] block"></span>    */}
 
       <CardSamples />
       {/* <span className="w-full h-[1.25rem] block"></span>  */}
@@ -57,8 +55,20 @@ const FunnelReferal = () => {
       <CardsTestimonials />
       {/* <span className="w-full h-[1.25rem] block"></span>  */}
 
+      <GetFreeCard />
+      {/* <span className="w-full h-[1.25rem] block"></span>    */}
+
       <SoftwareForYou />
       {/* <span className="w-full h-[1.25rem] block"></span>      */}
+
+      <GetFreeCard />
+      {/* <span className="w-full h-[1.25rem] block"></span>    */}
+
+      <ReferalMktDiagram />
+      {/* <span className="w-full h-[1.25rem] block"></span> */}
+
+      <Faqs />
+      {/* <span className="w-full h-[1.25rem] block"></span> */}
 
       <ArtworkDelivery />
       {/* <span className="w-full h-[1.25rem] block"></span>    */}
