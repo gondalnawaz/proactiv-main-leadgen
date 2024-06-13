@@ -98,3 +98,20 @@
     clip-path: polygon(100% 0, 50% 100%, 0 0);
     margin-top: -350px;
 }
+
+
+@media only screen and (max-width: 500px) {
+    .fontGeneral
+    {
+        font-size: 0.7rem;
+    }
+    .fontTitle
+    {
+        font-size: 1.5rem;
+    }
+    .desctext
+    {
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+  }
