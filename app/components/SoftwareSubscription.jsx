@@ -129,7 +129,7 @@ const SoftwareSubscription = () => {
         (NO CONTRACT - cancel at any time <br /> - 30 days notice)
       </p>
 
-      <video   ref={videoRef} controls className="w-[80vw] rounded-md md:w-[45%]" poster={""}>
+      <video   ref={videoRef} autoPlay muted controls className="w-[80vw] rounded-md md:w-[45%]" poster={""}>
         <source src={'https://res.cloudinary.com/dbdkbwkhr/video/upload/v1715274697/Cards_Hairdresser_x264_pmi5yw.mp4'} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
