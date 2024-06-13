@@ -148,12 +148,12 @@ export const Spinning = ({ setCongrats, setResult }) => {
         {/* <p className="fontSubTitle whitespace-nowrap">To See How Many Free Months Use You Get</p>          */}
         <p className='fontTitle' style={{ paddingBottom: "0", fontWeight: '600' }}>Spin The Wheel</p>
         
-        <p className="font-semibold text-[1.2rem] px-4 mt-2 text-[#4a6bb6]">
+        <p className="font-semibold text-[1rem] px-4 mt-2 text-[#4a6bb6] desctext">
           To See How Many{" "}
-          <span className="text-[#a62b2b] text-[1.5rem]"> Free </span>Months Use
+          <span className="text-[#a62b2b] text-[1.2rem]"> Free </span>Months Use
           Of The ‘Proactiv Privileges’ Business Management Software You Win. To
           Go With Your 100{" "}
-          <span className="text-[#a62b2b] text-[1.5rem]"> Free </span> Plastic
+          <span className="text-[#a62b2b] text-[1.2rem]"> Free </span> Plastic
           Referral Marketing Cards.
           <br />
           <span className="text-[1rem] italic">(total value up to £653) </span>
@@ -379,7 +379,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
           id="containerSpinner"
           className="h-auto w-[95%] flex flex-col justify-center items-center transform scale-[0.9]"
         >
-          <div className="flex justify-center items-center my-7 px-2 transform scale-100">
+          <div className="flex justify-center items-center my-4 px-2 transform scale-100">
             <div
               class="containerCSS"
               style={{ transform: `rotate(${deg}deg)` }}
@@ -389,7 +389,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  1 Month <span className="text-white">Free</span>
+                3 Months <span className="text-white">Free</span>
                 </div>
               </div>
 
@@ -398,7 +398,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  2 Months <span className="text-[#ff0000]">Free</span>
+                3M FREE + 3M <span className="text-[#ff0000]">1/2</span>
                 </div>
               </div>
               <div
@@ -406,7 +406,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[30px] h-[118px]">
-                  3 Months <span className="text-white">Free</span>
+                6 Months <span className="text-white">Free</span>
                 </div>
               </div>
               <div
@@ -414,7 +414,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  2 Month <span className="text-[#ff0000]">Free</span>
+                6M FREE + 6M <span className="text-[#ff0000]">1/2</span>
                 </div>
               </div>
               <div
@@ -422,7 +422,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  1 Month <span className="text-white">Free</span>
+                9 Months <span className="text-white">Free</span>
                 </div>
               </div>
               <div
@@ -430,7 +430,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                  1 Month <span className="text-white">Free</span>
+                12 Months <span className="text-white">Free</span>
                 </div>
               </div>
             </div>
@@ -457,7 +457,6 @@ export const Spinning = ({ setCongrats, setResult }) => {
 
       </div>
     </div>
-
   )
 }
 
