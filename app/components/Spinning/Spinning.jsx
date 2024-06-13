@@ -148,12 +148,12 @@ export const Spinning = ({ setCongrats, setResult }) => {
         {/* <p className="fontSubTitle whitespace-nowrap">To See How Many Free Months Use You Get</p>          */}
         <p className='fontTitle' style={{ paddingBottom: "0", fontWeight: '600' }}>Spin The Wheel</p>
         
-        <p className="font-semibold text-[1.2rem] px-4 mt-2 text-[#4a6bb6]">
+        <p className="font-semibold text-[1rem] px-4 mt-2 text-[#4a6bb6] desctext">
           To See How Many{" "}
-          <span className="text-[#a62b2b] text-[1.5rem]"> Free </span>Months Use
+          <span className="text-[#a62b2b] text-[1.2rem]"> Free </span>Months Use
           Of The ‘Proactiv Privileges’ Business Management Software You Win. To
           Go With Your 100{" "}
-          <span className="text-[#a62b2b] text-[1.5rem]"> Free </span> Plastic
+          <span className="text-[#a62b2b] text-[1.2rem]"> Free </span> Plastic
           Referral Marketing Cards.
           <br />
           <span className="text-[1rem] italic">(total value up to £653) </span>
@@ -379,7 +379,7 @@ export const Spinning = ({ setCongrats, setResult }) => {
           id="containerSpinner"
           className="h-auto w-[95%] flex flex-col justify-center items-center transform scale-[0.9]"
         >
-          <div className="flex justify-center items-center my-7 px-2 transform scale-100">
+          <div className="flex justify-center items-center my-4 px-2 transform scale-100">
             <div
               class="containerCSS"
               style={{ transform: `rotate(${deg}deg)` }}
