@@ -17,7 +17,7 @@ const ArtworkDelivery = () => {
       <p className="fontTitle" style={{fontWeight:'700'}}>Artworks And Delivery Explained</p>
 
       <video controls className="w-[80vw] rounded-md md:w-[45%]" poster={"https://res.cloudinary.com/dbew7ibhf/image/upload/v1688673384/imagenposter_ut847d_ixfvpj.png"}>
-        <source src={'https://res.cloudinary.com/dbew7ibhf/video/upload/v1688673394/VIDEO_3_FINAL_v3_wau6e4_tlqsry.mp4'} type="video/mp4" />
+        <source src={'https://res.cloudinary.com/dbdkbwkhr/video/upload/v1720086872/VIDEO_3_FINAL_v3_wau6e4_tlqsry_2_lfybwt.mp4'} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       
