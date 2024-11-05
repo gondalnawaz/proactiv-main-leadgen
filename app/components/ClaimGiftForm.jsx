@@ -32,7 +32,7 @@ const ClaimGiftForm = () => {
       alert('Invalid number')
     } else {
       localStorage.setItem('data', JSON.stringify(data));
-      router.push('/funnel/spin');
+      router.push('/funnel/questionaire');
     }
   }
   // const [resetLoading, setResetLoading] = useState(false);
