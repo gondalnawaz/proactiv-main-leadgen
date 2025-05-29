@@ -1,15 +1,16 @@
-'use client'
-import React from 'react'
-import CardsFree from '@/app/components/CardsFree'
-import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
+"use client";
+import React from "react";
+import CardsFree from "@/app/components/CardsFree";
+import PixelPageView from "../../components/facebookPixels/PixelPageView.jsx";
+import CardsForm from "@/app/components/CardsForm.jsx";
 
 const FunnelCards = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen">
+    <>
       <PixelPageView />
-      <CardsFree />
+      <CardsForm />
       <span className="w-full  h-1 block"></span>
-    </div>
-  )
-}
-export default FunnelCards
+    </>
+  );
+};
+export default FunnelCards;

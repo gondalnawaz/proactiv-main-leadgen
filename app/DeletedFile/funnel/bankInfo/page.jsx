@@ -1,113 +1,111 @@
-"use client";
-import Image from "next/image";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState, useMemo, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import PixelPageView from "../../components/facebookPixels/PixelPageView.jsx";
+'use client';
+import Image from 'next/image';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
 
 // import CheckoutIntegrationSample from '@/app/components/CheckoutIntegrationSample'
 
 const Payment = () => {
-  const [address, setaddress] = useState("");
-  const [{ deposit, depositValue, selectedPackage, fullname }, setInfo] =
-    useState({
-      deposit: "",
-      depositValue: "",
-      selectedPackage: "",
-      fullname: "",
-    });
+  const [address, setaddress] = useState('');
+  const [{
+    deposit,
+    depositValue,
+    selectedPackage,
+    fullname,
+  }, setInfo] = useState({
+    deposit: '',
+    depositValue: '',
+    selectedPackage: '',
+    fullname: '',
+  });
   const [loading, setLoading] = useState(false);
-  const [atmformData, setAtmFormData] = useState({ cardNumber: "" });
+  const [atmformData, setAtmFormData] = useState({ cardNumber: '' });
   const [formData, setFormData] = useState({
-    cardNumber: "",
-    cardHolderName: "",
-    month: "",
-    year: "",
-    cvc: "",
+    cardNumber: '',
+    cardHolderName: '',
+    month: '',
+    year: '',
+    cvc: '',
   });
 
-  // const [softwaredata, setSoftwaredata] = useState('');
-  const [cardsdata, setCardsdata] = useState("");
-  // const [keyfobdata, setKeyfobdata] = useState('');
-  console.log(cardsdata);
+  const [softwaredata, setSoftwaredata] = useState('');
+  const [cardsdata, setCardsdata] = useState('');
+  const [keyfobdata, setKeyfobdata] = useState('');
 
   const searchParams = useSearchParams();
-  //  const depositBoolean = searchParams.get('deposit');
-  // const depositStatus = totaldeposit.split('deposit=')[1];
+  const totaldeposit = searchParams.get('totaldeposit');
+  const depositStatus = totaldeposit.split('deposit=')[1];
   const router = useRouter();
 
   useEffect(() => {
-    let storageCards = JSON.parse(localStorage.getItem("cardsdata"));
+    const userData =
+      typeof window !== 'undefined' && localStorage.getItem('data')
+        ? JSON.parse(localStorage.getItem('data'))
+        : '';
+    const fullname = userData ? userData.fullname : '';
+    const address = userData ? userData.address : '';
+    const selectedPackage = userData ? userData.packageselected : '';
+
+    let storageSoft = JSON.parse(localStorage.getItem('software'));
+    let storageCards = JSON.parse(localStorage.getItem('cardsdata'));
+    let storageKeyfobs = JSON.parse(localStorage.getItem('keyfobs'));
+
+    setSoftwaredata(storageSoft);
     setCardsdata(storageCards);
+    setKeyfobdata(storageKeyfobs);
+
+    // get data from local storage of deposit
+
+    const deposit =
+      typeof window !== 'undefined' ? localStorage.getItem('deposit') : null;
+
+    // Check if the data exists before using it
+    if (deposit !== null) {
+      // Convert the retrieved data to the appropriate type if necessary
+      const depositValue = parseFloat(deposit);
+      localStorage.setItem('deposit', depositValue.toString());
+      // Now you can use the depositValue in your component
+      console.log('Deposit:', depositValue);
+    } else {
+      console.log('No deposit data found');
+    }
+    setInfo({
+      deposit,
+      depositValue,
+      selectedPackage,
+      fullname,
+    });
+    setaddress(address);
+
   }, []);
 
-  // useEffect(() => {
-  //   const userData =
-  //     typeof window !== 'undefined' && localStorage.getItem('data')
-  //       ? JSON.parse(localStorage.getItem('data'))
-  //       : '';
-  //   const fullname = userData ? userData.fullname : '';
-  //   const address = userData ? userData.address : '';
-  //   const selectedPackage = userData ? userData.packageselected : '';
-
-  //   let storageSoft = JSON.parse(localStorage.getItem('software'));
-  //   let storageCards = JSON.parse(localStorage.getItem('cardsdata'));
-  //   let storageKeyfobs = JSON.parse(localStorage.getItem('keyfobs'));
-
-  //   setSoftwaredata(storageSoft);
-  //   setCardsdata(storageCards);
-  //   setKeyfobdata(storageKeyfobs);
-
-  //   // get data from local storage of deposit
-
-  //   const deposit =
-  //     typeof window !== 'undefined' ? localStorage.getItem('deposit') : null;
-
-  //   // Check if the data exists before using it
-  //   if (deposit !== null) {
-  //     // Convert the retrieved data to the appropriate type if necessary
-  //     const depositValue = parseFloat(deposit);
-  //     localStorage.setItem('deposit', depositValue.toString());
-  //     // Now you can use the depositValue in your component
-  //     console.log('Deposit:', depositValue);
-  //   } else {
-  //     console.log('No deposit data found');
-  //   }
-  //   setInfo({
-  //     deposit,
-  //     depositValue,
-  //     selectedPackage,
-  //     fullname,
-  //   });
-  //   setaddress(address);
-
-  // }, []);
 
   const handleAtmInputChange = (e) => {
     const inputValue = e.target.value;
     const formattedValue = inputValue
-      .replace(/[^\d]/g, "")
-      .replace(/(.{4})/g, "$1 ")
+      .replace(/[^\d]/g, '')
+      .replace(/(.{4})/g, '$1 ')
       .trim();
 
     setFormData({
       ...formData,
-      cardNumber: inputValue.replace(/ /g, ""),
+      cardNumber: inputValue.replace(/ /g, ''),
     });
     setAtmFormData({
       ...atmformData,
       cardNumber: formattedValue,
     });
   };
-  const randomnumber = Math.floor(Math.random() * 900) + 100;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let formattedValue;
 
-    if (name === "cvc") {
-      formattedValue = value.replace(/[^\d]/g, "");
+    if (name === 'cvc') {
+      formattedValue = value.replace(/[^\d]/g, '');
       formattedValue = formattedValue.slice(0, 3);
     } else {
       formattedValue = value;
@@ -121,23 +119,24 @@ const Payment = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (loading) return;
+    if (loading)
+      return;
 
     setLoading(true);
     try {
       const userData =
-        typeof window !== "undefined" && localStorage.getItem("data")
-          ? JSON.parse(localStorage.getItem("data"))
-          : "";
+        typeof window !== 'undefined' && localStorage.getItem('data')
+          ? JSON.parse(localStorage.getItem('data'))
+          : '';
 
-      const dateSplitted = softwaredata.date.split("-");
+      const dateSplitted = softwaredata.date.split('-');
       const dateUtc = new Date(
         new Date(
           `${dateSplitted[2]}/${dateSplitted[1]}/${dateSplitted[0]}`
         ).toUTCString()
       );
-      const paymentResponse = await axios.post("/api/payment/card", {
-        amountGBP: cardsdata?.baseData?.totalCardPrice,
+      const paymentResponse = await axios.post('/api/payment/card', {
+        amountGBP: amountGBP,
         cardNumber: formData.cardNumber,
         month: formData.month,
         year: formData.year,
@@ -156,38 +155,43 @@ const Payment = () => {
         cards: cardsdata.baseData,
       });
       if (paymentResponse.status != 200) {
-        alert("Payment Error:", error.message);
-        return;
+        alert('Payment Error:', error.message);
+        return
       }
 
-      const cTotal =
-        cardsdata.option == "full payment"
-          ? cardsdata.totaldue.toFixed(2).replace(",", ".")
-          : cardsdata.payment.toFixed(2).replace(",", ".");
+      const cTotal = cardsdata.option == 'full payment' ?
+        cardsdata.totaldue.toFixed(2).replace(',', '.') :
+        cardsdata.payment.toFixed(2).replace(',', '.');
       const kfTotal = (keyfobdata.customers * keyfobdata.price * 0.5)
         .toFixed(2)
-        .replace(",", ".");
-      const srTotal =
-        keyfobdata.addrings == "No"
-          ? "0.00"
-          : (Math.ceil(keyfobdata.customers / 100) * (6 * 0.5))
-              .toFixed(2)
-              .replace(",", ".");
-      const dueAmount = parseFloat(cTotal);
+        .replace(',', '.');
+      const srTotal = keyfobdata.addrings == 'No' ?
+        '0.00' :
+        (Math.ceil(keyfobdata.customers / 100) * (6 * 0.5))
+          .toFixed(2)
+          .replace(',', '.');
+      const dueAmount =
+        parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal) - deposit < 0
+          ? 0
+          : (
+            parseFloat(cTotal) +
+            parseFloat(kfTotal) +
+            parseFloat(srTotal) -
+            deposit
+          ).toFixed(2);
       try {
-        await axios.post("/api/notify", {
+
+        await axios.post('/api/notify', {
           userData,
           softwareData: softwaredata,
           cardsData: cardsdata,
           keyFobData: keyfobdata,
-          customers: localStorage.getItem("customers"),
+          customers: localStorage.getItem('customers'),
           orderSummary: [
-            `${cardsdata.needed + 100} Additional Cards ${
-              cardsdata.option
+            `${cardsdata.needed + 100} Additional Cards ${cardsdata.option
             } = ${cTotal}`,
             `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
-            `${
-              keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
+            `${keyfobdata.addrings == 'No' ? 0 : keyfobdata.customers
             } Split Rings = ${srTotal}`,
             `Total = ${(
               parseFloat(cTotal) +
@@ -195,29 +199,28 @@ const Payment = () => {
               parseFloat(srTotal)
             )
               .toFixed(2)
-              .replace(",", ".")}`,
+              .replace(',', '.')}`,
             `Deposity (today) = ${deposit}`,
             `Balance Due (before dispatch) = ${dueAmount}`,
           ],
-          transactionReference: paymentResponse.data["transaction-reference"],
+          transactionReference: paymentResponse.data['transaction-reference'],
         });
       } catch (error) {
         console.log(error);
       }
       try {
-        await axios.post("/api/user-notify", {
+
+        await axios.post('/api/user-notify', {
           userData,
           softwareData: softwaredata,
           cardsData: cardsdata,
           keyFobData: keyfobdata,
-          customers: localStorage.getItem("customers"),
+          customers: localStorage.getItem('customers'),
           orderSummary: [
-            `${cardsdata.needed + 100} Additional Cards ${
-              cardsdata.option
+            `${cardsdata.needed + 100} Additional Cards ${cardsdata.option
             } = ${cTotal}`,
             `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
-            `${
-              keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
+            `${keyfobdata.addrings == 'No' ? 0 : keyfobdata.customers
             } Split Rings = ${srTotal}`,
             `Total = ${(
               parseFloat(cTotal) +
@@ -225,25 +228,25 @@ const Payment = () => {
               parseFloat(srTotal)
             )
               .toFixed(2)
-              .replace(",", ".")}`,
+              .replace(',', '.')}`,
             `Deposity (today) = ${deposit}`,
             `Balance Due (before dispatch) = ${dueAmount}`,
           ],
-          transactionReference: paymentResponse.data["transaction-reference"],
+          transactionReference: paymentResponse.data['transaction-reference'],
         });
       } catch (error) {
         console.log(error);
       }
 
-      router.push(
-        `/funnel/thanks?status=success&reference=${paymentResponse.data["transaction-reference"]}`
-      );
+      router.push(`/funnel/thanks?status=success&reference=${paymentResponse.data['transaction-reference']}`);
       setLoading(false);
+
     } catch (error) {
       console.log(error?.response?.data?.error);
       if (error?.response?.data?.error)
-        alert("Payment Error:" + error?.response?.data?.error);
-      else alert("Payment Error");
+        alert('Payment Error:' + error?.response?.data?.error);
+      else
+        alert('Payment Error');
       setLoading(false);
     }
   };
@@ -263,9 +266,9 @@ const Payment = () => {
   const handleSaveAddress = () => {
     // Save the edited address to local storage
     localStorage.setItem(
-      "data",
+      'data',
       JSON.stringify({
-        ...JSON.parse(localStorage.getItem("data")),
+        ...JSON.parse(localStorage.getItem('data')),
         address: editedAddress,
       })
     );
@@ -277,16 +280,16 @@ const Payment = () => {
     setEditedAddress(e.target.value);
   };
 
-  // const amountGbpFromUrl = totaldeposit.split('?')[0];
-  // const amountGBP = useMemo(() => {
-  //   if (depositStatus !== 'true')
-  //     return amountGbpFromUrl;
+  const amountGbpFromUrl = totaldeposit.split('?')[0];
+  const amountGBP = useMemo(() => {
+    if (depositStatus !== 'true')
+      return amountGbpFromUrl;
 
-  //   const result = parseFloat(amountGbpFromUrl) - 51.5;
-  //   return result >= 51.5 ?
-  //     '51.5' :
-  //     amountGbpFromUrl;
-  // }, [amountGbpFromUrl]);
+    const result = parseFloat(amountGbpFromUrl) - 51.5;
+    return result >= 51.5 ?
+      '51.5' :
+      amountGbpFromUrl;
+  }, [amountGbpFromUrl]);
 
   return (
     <div className="bg-white h-[150vh] w-screen">
@@ -298,10 +301,10 @@ const Payment = () => {
         height={500}
         alt="Picture of the author"
         style={{
-          marginTop: "70px",
-          marginLeft: "auto",
-          marginRight: "auto",
-          display: "block",
+          marginTop: '70px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          display: 'block',
         }}
       />
       <div className="container mx-auto mt-10">
@@ -310,24 +313,20 @@ const Payment = () => {
             <tr>
               <td className="py-2 px-4">
                 <div className="font-bold">Order summary</div>
-                <div className="flex space-x-4 mt-2">
-                  <div className="flex space-x-4">
-                    <h2 >
-                      Reference: 
-                    </h2>
-                    <span>Order #{randomnumber}</span>
-                  </div>
+                <div className="flex gap-56 mt-2">
+                  <div>Reference: </div>
                   <div className="text-gray-700">{fullname}</div>
                 </div>
                 <div className="flex gap-56 mt-2">
-                  <div>Description: Payment for ProactivMarketing order</div>
+                  <div>Description: </div>
                   <div className="text-gray-700">{selectedPackage}</div>
                 </div>
                 <div className="flex gap-52 mt-2">
                   <div className="font-bold">Amount GBP: </div>
                   {/* <div className="text-gray-700">£{deposit}</div> depositStatus */}
                   <div className="text-gray-700">
-                    £{cardsdata?.baseData?.totalCardPrice}
+                    £
+                    {parseFloat(amountGbpFromUrl).toFixed(2)}
                     {/* {depositStatus === 'true'
                       ? parseFloat(51.5).toFixed(2)
                       : parseFloat(amountGBP).toFixed(2)} */}
@@ -421,7 +420,7 @@ const Payment = () => {
                       className="mb-2 inline-block text-sm text-gray-800 sm:text-base font-bold"
                     >
                       Security Code
-                    </label>{" "}
+                    </label>{' '}
                     <br />
                     <div className="flex gap-2 ">
                       <input
@@ -483,25 +482,27 @@ const Payment = () => {
                   <button
                     className="cursor-pointer w-16 font-bold px-2 py-1 text-sm rounded bg-slate-400 border-1"
                     onClick={() => router.back()}
-                    type="button"
-                  >
+                    type='button'>
                     {/* onClick={() => router.push(`/funnel/order?deposit=${depositStatus === 'true' ? 'true' : 'false'}`)}> */}
                     Cancel
                   </button>
                   <button
                     onClick={handleFormSubmit}
                     disabled={
-                      loading ||
-                      !atmformData.cardNumber ||
-                      !formData.cardHolderName ||
-                      !formData.month ||
-                      !formData.year ||
-                      !formData.cvc
+                      (
+                        loading
+                      ) || (
+                        !atmformData.cardNumber ||
+                        !formData.cardHolderName ||
+                        !formData.month ||
+                        !formData.year ||
+                        !formData.cvc
+                      )
                     }
                     type="submit"
                     className="cursor-pointer w-32 ml-auto font-bold px-2 py-1 text-sm rounded bg-slate-400 border-1"
                   >
-                    {loading ? "Please wait ..." : "Make Payment"}
+                    {loading ? 'Please wait ...' : 'Make Payment'}
                   </button>
                 </form>
               </td>
@@ -509,8 +510,7 @@ const Payment = () => {
           </tbody>
         </table>
         <div className="text-center mt-5 ">
-          When you submit you transaction process by Worldpay, you confirm your
-          acceptance of WorldPay privacy policy.
+        When you submit you transaction process by Worldpay, you confirm your acceptance of WorldPay privacy policy.
         </div>
         <div className="text-center mt-5 font-bold">
           @ 2013-2024 . All rights reserved

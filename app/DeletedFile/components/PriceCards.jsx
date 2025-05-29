@@ -1,9 +1,10 @@
 import React from 'react'
 
-const PriceCards = () => {
+const PriceCards = ({closeModal}) => {
   return (
 
-    <div className='w-full '>
+    <div className='w-[95%] '>
+      <p className="absolute top-0 right-1 cursor-pointer" onClick={()=>closeModal()} style={{fontWeight:'700'}}>X</p>
       <p className="fontTitle text-center" style={{ fontWeight:'700', color:'#a52a2a' , padding: '5px 0 20px 0'}}>Card Prices</p>
       <table className="w-full border rounded-lg">
         <thead>

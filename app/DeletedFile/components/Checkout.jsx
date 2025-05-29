@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const Checkout = () => {
-  // const [softwaredata, setSoftwaredata] = useState('');
+  const [softwaredata, setSoftwaredata] = useState('');
   const [cardsdata, setCardsdata] = useState('');
   const [keyfobdata, setKeyfobdata] = useState('');
   const [cTotal, setCtotal] = useState('');
@@ -159,13 +159,13 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    // let storageSoft = JSON.parse(localStorage.getItem('software'));
+    let storageSoft = JSON.parse(localStorage.getItem('software'));
     let storageCards = JSON.parse(localStorage.getItem('cardsdata'));
-    // let storageKeyfobs = JSON.parse(localStorage.getItem('keyfobs'));
+    let storageKeyfobs = JSON.parse(localStorage.getItem('keyfobs'));
 
-    // setSoftwaredata(storageSoft);
+    setSoftwaredata(storageSoft);
     setCardsdata(storageCards);
-    // setKeyfobdata(storageKeyfobs);
+    setKeyfobdata(storageKeyfobs);
 
     // if(averagecustomers != ''){
     //     setCustomers( parseInt(averagecustomers))
@@ -314,20 +314,20 @@ const handleDepositBlur = () => {
               Inc. Artwork & Delivery ) <br />
               {/* (100 free cards + { cardsdata.needed }) */}
             </td>
-            <td className="resize-text py-1 px-2">&#163; {0} </td>
+            <td className="resize-text py-1 px-2">&#163; {cTotal} </td>
           </tr>
           <tr className="border-b bg-[#ffffff]">
             <td className="resize-text py-1 px-2">
               {keyfobdata.customers} Keyfobs
             </td>
-            <td className="resize-text py-1 px-2">&#163; {0}</td>
+            <td className="resize-text py-1 px-2">&#163; {kfTotal}</td>
           </tr>
           <tr className="border-b bg-[#96cfd1]">
             <td className="resize-text py-1 px-2">
               {keyfobdata.addrings == 'No' ? 0 : keyfobdata.customers} Split
               Rings
             </td>
-            <td className="resize-text py-1 px-2">&#163; {0} </td>
+            <td className="resize-text py-1 px-2">&#163; {srTotal} </td>
           </tr>
         </tbody>
       </table>
