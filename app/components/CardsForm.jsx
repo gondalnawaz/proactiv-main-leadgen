@@ -14,12 +14,9 @@ const CardsForm = ({ estimate }) => {
   const [paymentOption, setPaymentOption] = useState("51.50");
   const [cardsData, setCardsData] = useState({
     needed: addition,
-    totaldue: 0,
-    payment: 0,
-    option: "",
   });
 
-  // console.log("Cards", cardsData);
+  console.log("Cards", cardsData);
 
   const hangelSelectedState = (e) => {
     console.log(selectedOption);
@@ -153,30 +150,29 @@ const CardsForm = ({ estimate }) => {
 
     // alert(`${deposit} ${ full} ${typeof deposit} ${typeof full}`)
     if (deposit > full) {
-      alert("Deposit can be higher than the total."+ (deposit)+ ' === '+ (full));
-    } else if (deposit < 51.5 && (selectedOption===false) ) {
+      alert("Deposit can be higher than the total." + deposit + " === " + full);
+    } else if (deposit < 51.5 && selectedOption === false) {
       alert("The minimum deposit is £51.50");
     } else {
       localStorage.setItem(
         "cardsdata",
         JSON.stringify({
           ...cardsData,
-          baseData: {
-            additionalCards: addition,
-            totalCardPrice: (selectedOption === true)?totalPrice:paymentOption,
-            artworkOrDesignPrice: artWork,
-            courierDeliveryPrice: deliveryPrice,
-            paymentOption: selectedOption ? "full payment" : "deposit",
-            minDeposit: 51.5,
-          },
+          totalCardPrice: totalPrice,
+          depositPrice: paymentOption,
+          dueBalance: totalPrice - paymentOption,
+          artworkOrDesignPrice: artWork,
+          courierDeliveryPrice: deliveryPrice,
+          paymentOption: selectedOption ? "full payment" : "deposit",
+          minDeposit: 51.5,
         })
       );
       // router.push('/funnel/order');
 
       if (selectedOption) {
-        router.push("/funnel/bankInfo");
+        router.push("/funnel/order");
       } else {
-        router.push("/funnel/bankInfo");
+        router.push("/funnel/order");
       }
     }
   };
@@ -199,12 +195,6 @@ const CardsForm = ({ estimate }) => {
   useEffect(() => {
     setCardsData({
       needed: addition,
-      totaldue:
-        parseInt(price || 0) * parseInt(addition || 0) +
-        parseInt(artWork || 0) +
-        parseInt(deliveryPrice || 0),
-      payment: parseFloat(paymentOption.replace("£", "")),
-      option: selectedOption ? "full payment" : "deposit",
     });
   }, [
     paymentOption,
@@ -349,14 +339,15 @@ const CardsForm = ({ estimate }) => {
             className="font-bold px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
 
-          {
-          (selectedOption===false)? <div className="flex flex-col justify-center items-center">
-                <p className="mb-0 text-xs" style={{ textAlign: "center" }}>
-                 Balance Due £{totalPrice-paymentOption}
-                </p>
-              </div>:<div></div>
-           
-          }
+          {selectedOption === false ? (
+            <div className="flex flex-col justify-center items-center">
+              <p className="mb-0 text-xs" style={{ textAlign: "center" }}>
+                Balance Due £{totalPrice - paymentOption}
+              </p>
+            </div>
+          ) : (
+            <div></div>
+          )}
 
           <button
             type="submit"

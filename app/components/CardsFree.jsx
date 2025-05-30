@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import CardsForm from './CardsForm';
+import { useRouter } from 'next/navigation';
 
 const CardsFree = () => {
   const [calculate, serCalculate] = useState(false);
@@ -12,6 +13,7 @@ const CardsFree = () => {
     months: '',
   });
   const [percentageField, setPercentageField] = useState('100');
+  const router = useRouter()
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -68,11 +70,12 @@ const handleChange = (e) => {
       alert('Percentage must be between 1 - 100');
     } else {
       serCalculate(true);
+      router.push("/funnel/order")
     }
   };
 
   useEffect(() => {
-    localStorage.setItem('customers', JSON.stringify(estimate.average));
+    localStorage.setItem('cardsdata', JSON.stringify({needed:(Number(estimate.average)*Number(estimate.percentage / 100)*Number(estimate.cards)*Number(estimate.months))}));
   }, [calculate]);
 
   return (
@@ -213,7 +216,7 @@ const handleChange = (e) => {
       </form>
 
       <span className="w-full  h-1 block"></span>
-
+{/* 
       {calculate && (
         <CardsForm
           averageCustomers={estimate.average}
@@ -227,7 +230,7 @@ const handleChange = (e) => {
             estimate.months
           )}
         />
-      )}
+      )} */}
     </div>
   );
 };

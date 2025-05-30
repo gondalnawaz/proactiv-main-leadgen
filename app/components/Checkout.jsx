@@ -1,17 +1,23 @@
-'use client';
-import axios from 'axios';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+"use client";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Checkout = () => {
-  // const [softwaredata, setSoftwaredata] = useState('');
-  const [cardsdata, setCardsdata] = useState('');
-  const [keyfobdata, setKeyfobdata] = useState('');
-  const [cTotal, setCtotal] = useState('');
-  const [kfTotal, setKftotal] = useState('');
-  const [srTotal, setSrtotal] = useState('');
+  // const [softwaredata, setSoftwaredata] = useState('')
+  const router = useRouter();
+  const [cardsdata, setCardsdata] = useState("");
+  const [cards, setCards] = useState("");
+  const [addtionCards, setAddtionCards] = useState("");
+  const [keyfob, setkeyfob] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
+  const [depositPrice, setDepositPrice] = useState("");
+  const [keyfobdata, setKeyfobdata] = useState("");
+  const [cTotal, setCtotal] = useState("");
+  const [kfTotal, setKftotal] = useState("");
+  const [srTotal, setSrtotal] = useState("");
   const [deposit, setDeposit] = useState(
     parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal)
   );
@@ -19,33 +25,38 @@ const Checkout = () => {
   const [expireMonth, setExpireMonth] = useState();
   const [expireYear, setExpireYear] = useState();
   const [cvc, setCvc] = useState();
-  const [country, setCountry] = useState('default');
+  const [country, setCountry] = useState("default");
   const [isLoading, setIsLoading] = useState(false);
   const [paymentLink, setPaymentLink] = useState(null);
 
   const [depositSubtraction, setdepositSubtraction] = useState(false);
   const searchParams = useSearchParams();
+  console.log("Cards", cardsdata);
 
+  useEffect(() => {
+    let { needed } = JSON.parse(localStorage.getItem("cardsdata"));
+    setCards(needed);
+  }, []);
   const dueAmount =
     parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal) - deposit < 0
       ? 0
       : (
-        parseFloat(cTotal) +
-        parseFloat(kfTotal) +
-        parseFloat(srTotal) -
-        deposit
-      ).toFixed(2);
+          parseFloat(cTotal) +
+          parseFloat(kfTotal) +
+          parseFloat(srTotal) -
+          deposit
+        ).toFixed(2);
 
   let paymentResponse;
   let storedUserData;
   let customers;
-  if (typeof localStorage !== 'undefined') {
-    storedUserData = JSON.parse(localStorage.getItem('data') ?? null);
-    customers = JSON.parse(localStorage.getItem('customers') ?? null);
+  if (typeof localStorage !== "undefined") {
+    storedUserData = JSON.parse(localStorage.getItem("data") ?? null);
+    customers = JSON.parse(localStorage.getItem("customers") ?? null);
   }
 
   const cardPaymentHandler = async () => {
-    paymentResponse = await axios.post('/api/payment/card', {
+    paymentResponse = await axios.post("/api/payment/card", {
       amount: deposit,
       cardNumber: creditCard,
       month: expireMonth,
@@ -58,7 +69,7 @@ const Checkout = () => {
   const hostedPaymentHandler = async () => {
     setIsLoading(true);
     try {
-      paymentResponse = await axios.post('/api/payment/hosted', {
+      paymentResponse = await axios.post("/api/payment/hosted", {
         amount: deposit,
         dueAmount: dueAmount,
         userData: storedUserData,
@@ -71,8 +82,8 @@ const Checkout = () => {
       const paymentUrl = paymentResponse?.data?.data?.url;
 
       localStorage.setItem(
-        'transactionRreference',
-        paymentResponse?.data['transactionReference']
+        "transactionRreference",
+        paymentResponse?.data["transactionReference"]
       );
 
       // store deposit to local storage
@@ -80,18 +91,20 @@ const Checkout = () => {
       setPaymentLink(paymentUrl);
       // Send Email before going to Payment Method
       try {
-        if (process.env.NEXT_PUBLIC_WORLDPAY_USERNAME == 'Yes') {
-          const emailRegistration = await axios.post('/api/notify', {
+        if (process.env.NEXT_PUBLIC_WORLDPAY_USERNAME == "Yes") {
+          const emailRegistration = await axios.post("/api/notify", {
             userData: storedUserData,
             softwareData: softwaredata,
             cardsData: cardsdata,
             keyFobData: keyfobdata,
             customers,
             orderSummary: [
-              `${cardsdata.needed + 100} Additional Cards ${cardsdata.option
+              `${cardsdata.needed + 100} Additional Cards ${
+                cardsdata.option
               } = ${cTotal}`,
               `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
-              `${keyfobdata.addrings == 'No' ? 0 : keyfobdata.customers
+              `${
+                keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
               } Split Rings = ${srTotal}`,
               `Total = ${(
                 parseFloat(cTotal) +
@@ -99,11 +112,11 @@ const Checkout = () => {
                 parseFloat(srTotal)
               )
                 .toFixed(2)
-                .replace(',', '.')}`,
+                .replace(",", ".")}`,
               `Deposity (today) = ${deposit}`,
               `Balance Due (before dispatch) = ${dueAmount}`,
             ],
-            transactionReference: paymentResponse?.data['transactionReference'],
+            transactionReference: paymentResponse?.data["transactionReference"],
           });
 
           console.log(emailRegistration);
@@ -112,40 +125,40 @@ const Checkout = () => {
         console.log(error);
       }
 
-      window.open(paymentUrl, '_self');
+      window.open(paymentUrl, "_self");
     } catch (error) {
       console.log(error);
-      alert('Something Went Wrong');
+      alert("Something Went Wrong");
     } finally {
       setIsLoading(false);
     }
   };
 
   const inputCreditCardData = (e) => {
-    if (e.target.name == 'creditcard') {
+    if (e.target.name == "creditcard") {
       const value = e.target.value;
 
       if (/\D/.test(value)) {
-        alert('Just numbers');
+        alert("Just numbers");
       }
       if (value.length <= 16) {
         setCreditCard(value);
       }
     }
 
-    if (e.target.name == 'expireMonth') {
+    if (e.target.name == "expireMonth") {
       const value = e.target.value;
       if (value.length <= 2) {
         setExpireMonth(value);
       }
     }
-    if (e.target.name == 'expireYear') {
+    if (e.target.name == "expireYear") {
       const value = e.target.value;
       if (value.length <= 4) {
         setExpireYear(value);
       }
     }
-    if (e.target.name == 'cvc') {
+    if (e.target.name == "cvc") {
       const value = e.target.value;
       if (value.length <= 3) {
         setCvc(value);
@@ -158,58 +171,131 @@ const Checkout = () => {
     setCountry(e.target.value);
   };
 
-  useEffect(() => {
-    // let storageSoft = JSON.parse(localStorage.getItem('software'));
-    let storageCards = JSON.parse(localStorage.getItem('cardsdata'));
-    // let storageKeyfobs = JSON.parse(localStorage.getItem('keyfobs'));
-
-    // setSoftwaredata(storageSoft);
-    setCardsdata(storageCards);
-    // setKeyfobdata(storageKeyfobs);
-
-    // if(averagecustomers != ''){
-    //     setCustomers( parseInt(averagecustomers))
-    // }
-  }, []);
-
-  useEffect(() => {
-    if (cardsdata != '') {
-      if (cardsdata.option == 'full payment') {
-        setCtotal(cardsdata.totaldue.toFixed(2).replace(',', '.'));
-      } else {
-        setCtotal(cardsdata.totaldue.toFixed(2).replace(',', '.'));
-      }
+  const handleCardChange = (e) => {
+    const value = e.target.value;
+    if (value === "") {
+      setCards("");
+      return;
     }
-  }, [cardsdata]);
+    // Convert to number and validate
+    const number = Number(value);
+    if (!value.startsWith("-") && number > 0) {
+      setCards(value);
+    }
+  };
+
+  const handleKeyFobChange = (e) => {
+    const value = e.target.value;
+    if (value === "") {
+      setkeyfob("");
+      return;
+    }
+    // Convert to number and validate
+    const number = Number(value);
+    if (!value.startsWith("-") && number > 0) {
+      setkeyfob(value);
+    }
+  };
+
+  const handleAddtionCardChange = (e) => {
+    const value = e.target.value;
+    if (value === "") {
+      setAddtionCards("");
+      return;
+    }
+    setAddtionCards(value);
+  };
 
   useEffect(() => {
-    if (keyfobdata != '') {
+    localStorage.setItem("Additionals", JSON.stringify(addtionCards));
+  }, [handleAddtionCardChange]);
+
+  const handelChangeTotal = (e) => {
+    const rawValue = e.target.value.replace("£", "").trim();
+
+    // Allow user to clear input
+    if (rawValue === "") {
+      setTotalPrice("");
+      return;
+    }
+    // Validate number > 0 and no negative sign
+    const number = Number(rawValue);
+    if (!rawValue.startsWith("-") && !isNaN(number) && number >= 0) {
+      setTotalPrice(rawValue);
+    }
+  };
+
+  const handelChangeDeposit = (e) => {
+    const rawValue = e.target.value.replace("£", "").trim();
+
+    // Allow user to clear input
+    if (rawValue === "") {
+      setDepositPrice("");
+      return;
+    }
+    // Validate number > 0 and no negative sign
+    const number = Number(rawValue);
+    if (!rawValue.startsWith("-") && !isNaN(number) && number >= 0) {
+      setDepositPrice(rawValue);
+    }
+  };
+
+  localStorage.setItem("Deposit", JSON.stringify({ depositPrice }));
+  // useEffect(() => {
+  //   // let storageSoft = JSON.parse(localStorage.getItem('software'));
+  //   let storageCards = JSON.parse(localStorage.getItem("cardsdata"));
+  //   // let storageKeyfobs = JSON.parse(localStorage.getItem('keyfobs'));
+
+  //   // setSoftwaredata(storageSoft);
+  //   setCardsdata(storageCards);
+  //   // setKeyfobdata(storageKeyfobs);
+
+  //   // if(averagecustomers != ''){
+  //   //     setCustomers( parseInt(averagecustomers))
+  //   // }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (cardsdata != "") {
+  //     if (cardsdata.paymentOption == "full payment") {
+  //       setCtotal(cardsdata.totalCardPrice);
+  //     } else {
+  //       setCtotal(cardsdata.depositPrice);
+  //     }
+  //   }
+  // }, [cardsdata]);
+
+  useEffect(() => {
+    if (keyfobdata != "") {
       setKftotal(
         (keyfobdata.customers * keyfobdata.price * 0.5)
           .toFixed(2)
-          .replace(',', '.')
+          .replace(",", ".")
       );
 
-      if (keyfobdata.addrings == 'No') {
-        setSrtotal('0.00');
+      if (keyfobdata.addrings == "No") {
+        setSrtotal("0.00");
       } else {
         setSrtotal(
           (Math.ceil(keyfobdata.customers / 100) * (6 * 0.5))
             .toFixed(2)
-            .replace(',', '.')
+            .replace(",", ".")
         );
       }
     }
   }, [keyfobdata]);
 
   useEffect(() => {
-    setDeposit( depositSubtraction ? cardsdata.payment.toFixed(2).replace(',', '.'):(parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal)));
+    setDeposit(
+      depositSubtraction
+        ? cardsdata.payment.toFixed(2).replace(",", ".")
+        : parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal)
+    );
   }, [cTotal, kfTotal, srTotal]);
 
-
   useEffect(() => {
-    const search = searchParams.get('deposit');
-    if (search === 'true') {
+    const search = searchParams.get("deposit");
+    if (search === "true") {
       setdepositSubtraction(true);
     } else {
       setdepositSubtraction(false);
@@ -217,17 +303,17 @@ const Checkout = () => {
   }, [searchParams]);
 
   const handleDeposit = (e) => {
-  setDeposit(e.target.value);
-};
+    setDeposit(e.target.value);
+  };
 
-const handleDepositBlur = () => {
-  const value = parseFloat(deposit);
-  if (!isNaN(value)) {
-    setDeposit(value.toFixed(2));
-  } else {
-    setDeposit("0.00"); // fallback
-  }
-};
+  const handleDepositBlur = () => {
+    const value = parseFloat(deposit);
+    if (!isNaN(value)) {
+      setDeposit(value.toFixed(2));
+    } else {
+      setDeposit("0.00"); // fallback
+    }
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -238,18 +324,18 @@ const handleDepositBlur = () => {
       expireYear == null ||
       expireMonth == null ||
       cvc == null ||
-      country == 'default'
+      country == "default"
     ) {
-      alert('Complete the fields');
+      alert("Complete the fields");
     } else {
       if (expireYear < 2023) {
-        alert('Invalid expiration date');
+        alert("Invalid expiration date");
       } else if (expireYear == 2023 && expireMonth < 7) {
-        alert('Invalid expiration date');
+        alert("Invalid expiration date");
       } else if (creditCard.length < 16) {
-        alert('Invalid Credit Card');
+        alert("Invalid Credit Card");
       } else if (cvc.length < 3) {
-        alert('Invalid CVC');
+        alert("Invalid CVC");
       } else {
         cardPaymentHandler();
         // router.push('/funnel/thanks');
@@ -258,41 +344,55 @@ const handleDepositBlur = () => {
   };
 
   const hideElement = {
-    display: 'none',
+    display: "none",
+  };
+
+  const handlepayment = () => {
+    if (cards === "" || keyfob === "" || totalPrice === "" || depositPrice === "" || addtionCards === "") {
+      alert("All Fields are required");
+    } else if (depositPrice > totalPrice) {
+      alert(
+        "Deposit can be higher than the total."
+      );
+    } else if (depositPrice < 51) {
+      alert("The minimum deposit is £51.50");
+    } else {
+      router.push("/funnel/bankInfo")
+    }
   };
 
   return (
     <div className="flex flex-col w-[95%] my-4 py-5 items-center bg-white rounded-lg shadow-md relative h-full md:w-[52%]">
-      <p
+      {/* <p
         className="fontTitle text-center"
-        style={{ fontWeight: '700', color: '#a52a2a', padding: '5px 0 20px 0' }}
+        style={{ fontWeight: "700", color: "#a52a2a", padding: "5px 0 20px 0" }}
       >
         Checkout
-      </p>
+      </p> */}
       <p
         className="fontSubTitle text-center"
         style={{
-          fontSize: '1.5rem',
-          fontWeight: '700',
-          color: '#4a6bb6',
-          lineHeight: '1.2',
-          paddingBottom: '0.5rem',
+          fontSize: "1.5rem",
+          fontWeight: "700",
+          color: "#4a6bb6",
+          lineHeight: "1.2",
+          paddingBottom: "0.5rem",
         }}
       >
-        Order Summary
+        Order Details
       </p>
       <table className="w-[95%] border rounded-lg">
         <thead>
           <tr className="border-b bg-[#7a94b3]">
             <th
-              className="resize-text py-1 px-2 w-[75%] text-white"
-              style={{ fontWeight: '700' }}
+              className="resize-text py-1 px-2 w-[50%] text-white"
+              style={{ fontWeight: "700" }}
             >
               Description
             </th>
             <th
-              className="resize-text py-1 px-2 w-[25%] text-white"
-              style={{ fontWeight: '700' }}
+              className="resize-text py-1 px-2 w-[50%] text-white"
+              style={{ fontWeight: "700" }}
             >
               Total
             </th>
@@ -308,26 +408,40 @@ const handleDepositBlur = () => {
             <td className="resize-text py-1 px-2">FREE</td>
           </tr> */}
           <tr className="border-b bg-[#96cfd1]">
+            <td className="resize-text py-1 px-2">Number of cards</td>
             <td className="resize-text py-1 px-2">
-              {cardsdata.needed}  Cards <br /> ({' '}
-              {/* {cardsdata.option} ) <br /> */}
-              Inc. Artwork & Delivery ) <br />
-              {/* (100 free cards + { cardsdata.needed }) */}
+              <input
+                value={cards}
+                type="number"
+                onChange={handleCardChange}
+                placeholder="Enter cards"
+                className="bg-transparent focus:border-none focus:outline-none text-black text-center"
+              />
             </td>
-            <td className="resize-text py-1 px-2">&#163; {0} </td>
           </tr>
           <tr className="border-b bg-[#ffffff]">
+            <td className="resize-text py-1 px-2">Number of Keyfobs</td>
             <td className="resize-text py-1 px-2">
-              {keyfobdata.customers} Keyfobs
+              <input
+                value={keyfob}
+                type="number"
+                onChange={handleKeyFobChange}
+                placeholder="Enter keyfobs"
+                className="bg-transparent focus:border-none focus:outline-none text-black text-center"
+              />
             </td>
-            <td className="resize-text py-1 px-2">&#163; {0}</td>
           </tr>
           <tr className="border-b bg-[#96cfd1]">
+            <td className="resize-text py-1 px-2">Addtionals</td>
             <td className="resize-text py-1 px-2">
-              {keyfobdata.addrings == 'No' ? 0 : keyfobdata.customers} Split
-              Rings
+              <input
+                value={addtionCards}
+                type="text"
+                onChange={handleAddtionCardChange}
+                placeholder="Additional"
+                className="bg-transparent focus:border-none focus:outline-none text-black text-center"
+              />
             </td>
-            <td className="resize-text py-1 px-2">&#163; {0} </td>
           </tr>
         </tbody>
       </table>
@@ -336,43 +450,39 @@ const handleDepositBlur = () => {
         <p
           className="fontTitle  w-[75%]"
           style={{
-            fontWeight: '700',
-            color: 'black',
-            margin: '3px 0 4px 0',
-            fontSize: '1rem',
-            padding: '0 0 0 0',
-            textAlign: 'end',
+            fontWeight: "700",
+            color: "black",
+            margin: "3px 0 4px 0",
+            fontSize: "1rem",
+            padding: "0 0 0 0",
+            textAlign: "end",
           }}
         >
           Total:
         </p>
-        <p
-          className="fontTitle text-center w-[25%]"
-          style={{
-            fontWeight: '700',
-            color: 'black',
-            margin: '3px 0 4px 0',
-            fontSize: '1rem',
-            padding: '0 0 0 0',
-          }}
-        >
-          &#163;
-          {(parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal))
-            .toFixed(2)
-            .replace(',', '.')}
-        </p>
+        <div className="flex font-bold w-[25%] h-fit px-1 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+          <div className="w-[100%] flex overflow-hidden">
+            <input
+              type="text"
+              name="total"
+              value={`£${totalPrice}`}
+              onChange={handelChangeTotal}
+              className=" outline-none w-full"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="w-[95%] flex items-center pt-3">
         <p
           className="fontTitle w-[75%]"
           style={{
-            fontWeight: '700',
-            color: 'black',
-            margin: '3px 0 4px 0',
-            fontSize: '0.8rem',
-            padding: ' 0 5px 0 0',
-            textAlign: 'end',
+            fontWeight: "700",
+            color: "black",
+            margin: "3px 0 4px 0",
+            fontSize: "0.8rem",
+            padding: " 0 5px 0 0",
+            textAlign: "end",
           }}
         >
           Deposit (today):
@@ -380,13 +490,11 @@ const handleDepositBlur = () => {
         {/* <p className="fontTitle text-center" style={{ fontWeight:'700', color:'black' , margin: '5px 0 10px 0'}}>&#163;{ (parseFloat(cTotal) + parseFloat(kfTotal) + parseFloat(srTotal)).toFixed(2).replace(',', '.') }</p> */}
         <div className="flex font-bold w-[25%] h-fit px-1 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
           <div className="w-[100%] flex overflow-hidden">
-            £
             <input
               type="text"
               name="deposit"
-              value={Number(deposit || 0 ).toFixed(2)}
-              onChange={handleDeposit}
-              onBlur={handleDepositBlur}
+              value={`£${depositPrice}`}
+              onChange={handelChangeDeposit}
               className=" outline-none w-full"
             />
           </div>
@@ -424,12 +532,12 @@ const handleDepositBlur = () => {
         <p
           className="fontTitle w-[75%]"
           style={{
-            fontWeight: '700',
-            color: 'black',
-            margin: '3px 0 4px 0',
-            fontSize: '0.8rem',
-            padding: ' 0 5px 0 0',
-            textAlign: 'end',
+            fontWeight: "700",
+            color: "black",
+            margin: "3px 0 4px 0",
+            fontSize: "0.8rem",
+            padding: " 0 5px 0 0",
+            textAlign: "end",
           }}
         >
           Balance Due (before despatch):
@@ -437,7 +545,7 @@ const handleDepositBlur = () => {
 
         <input
           type="text"
-          value={`£${dueAmount}`}
+          value={`£${totalPrice - depositPrice}`}
           className="font-bold w-[25%] h-fit px-1 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
         {/* <input
@@ -445,7 +553,6 @@ const handleDepositBlur = () => {
           value={`£${parseFloat(cTotal + kfTotal + srTotal).toFixed(2).replace(',', '.')}`}
           className="font-bold w-[25%] h-fit px-1 py-1 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         /> */}
-
       </div>
 
       {/* PAYMENT METHOD */}
@@ -453,11 +560,11 @@ const handleDepositBlur = () => {
         <p
           className="fontSubTitle text-center"
           style={{
-            fontSize: '1.5rem',
-            fontWeight: '700',
-            color: '#4a6bb6',
-            lineHeight: '1.2',
-            paddingBottom: '0.5rem',
+            fontSize: "1.5rem",
+            fontWeight: "700",
+            color: "#4a6bb6",
+            lineHeight: "1.2",
+            paddingBottom: "0.5rem",
           }}
         >
           Payment Method
@@ -748,10 +855,11 @@ const handleDepositBlur = () => {
       <button
         type="submit"
         className="px-4 py-2 buttonsMain mt-3"
-      // onClick={isLoading ? null : hostedPaymentHandler}
+        onClick={handlepayment}
+        // onClick={isLoading ? null : hostedPaymentHandler}
       >
-        {isLoading ? (
-          'Processing...'
+        {/* {isLoading ? (
+          "Processing..."
         ) : paymentLink ? (
           <a href={paymentLink} target="_blank" rel="noopener noreferrer">
             Open Link for Payment
@@ -763,15 +871,11 @@ const handleDepositBlur = () => {
           //   Pay Amount
           // </a>
           //  also send totalDeposit(it have value) with the link
-          <Link
-            href={`/funnel/bankInfo?totaldeposit=${deposit}?deposit=${depositSubtraction ? 'true' : 'false'}`}
-            legacyBehavior
-          >
-            <a>
-              Pay Amount
-            </a>
-          </Link>
-        )}
+          // <Link href={`/funnel/bankInfo`} legacyBehavior>
+            <a>Pay Amount</a>
+          // </Link>
+        )} */}
+        Pay Amount
       </button>
     </div>
   );

@@ -29,8 +29,9 @@ const Payment = () => {
 
   // const [softwaredata, setSoftwaredata] = useState('');
   const [cardsdata, setCardsdata] = useState("");
+  const [depositPrice, setDepositPrice] = useState("");
   // const [keyfobdata, setKeyfobdata] = useState('');
-  console.log(cardsdata);
+  // console.log(cardsdata);
 
   const searchParams = useSearchParams();
   //  const depositBoolean = searchParams.get('deposit');
@@ -38,8 +39,10 @@ const Payment = () => {
   const router = useRouter();
 
   useEffect(() => {
-    let storageCards = JSON.parse(localStorage.getItem("cardsdata"));
+    let storageCards = JSON.parse(localStorage.getItem(""));
+    let { depositPrice } = JSON.parse(localStorage.getItem("Deposit"));
     setCardsdata(storageCards);
+    setDepositPrice(depositPrice);
   }, []);
 
   // useEffect(() => {
@@ -137,7 +140,7 @@ const Payment = () => {
         ).toUTCString()
       );
       const paymentResponse = await axios.post("/api/payment/card", {
-        amountGBP: cardsdata?.baseData?.totalCardPrice,
+        amountGBP: depositPrice,
         cardNumber: formData.cardNumber,
         month: formData.month,
         year: formData.year,
@@ -249,7 +252,7 @@ const Payment = () => {
   };
 
   const [editingAddress, setEditingAddress] = useState(false);
-  const [editedAddress, setEditedAddress] = useState(address);
+  const [editedAddress, setEditedAddress] = useState("");
 
   const handleEditAddress = () => {
     setEditingAddress(true);
@@ -275,7 +278,33 @@ const Payment = () => {
 
   const handleAddressChange = (e) => {
     setEditedAddress(e.target.value);
+     localStorage.setItem(
+      "data",
+      JSON.stringify({
+        ...JSON.parse(localStorage.getItem("data")),
+        address: editedAddress,
+      })
+    );
   };
+
+  const handelChangeDeposit = (e) => {
+    const rawValue = e.target.value.replace("£", "").trim();
+
+    // Allow user to clear input
+    if (rawValue === "") {
+      setDepositPrice("");
+      return;
+    }
+    // Validate number > 0 and no negative sign
+    const number = Number(rawValue);
+    if (!rawValue.startsWith("-") && !isNaN(number) && number >= 0) {
+      setDepositPrice(rawValue);
+    }
+  };
+
+  // useEffect(() => {
+  //   localStorage.setItem("Deposit", JSON.stringify({ depositPrice }));
+  // }, [depositPrice]);
 
   // const amountGbpFromUrl = totaldeposit.split('?')[0];
   // const amountGBP = useMemo(() => {
@@ -312,9 +341,7 @@ const Payment = () => {
                 <div className="font-bold">Order summary</div>
                 <div className="flex space-x-4 mt-2">
                   <div className="flex space-x-4">
-                    <h2 >
-                      Reference: 
-                    </h2>
+                    <h2>Reference:</h2>
                     <span>Order #{randomnumber}</span>
                   </div>
                   <div className="text-gray-700">{fullname}</div>
@@ -327,11 +354,13 @@ const Payment = () => {
                   <div className="font-bold">Amount GBP: </div>
                   {/* <div className="text-gray-700">£{deposit}</div> depositStatus */}
                   <div className="text-gray-700">
-                    £{cardsdata?.baseData?.totalCardPrice}
-                    {/* {depositStatus === 'true'
-                      ? parseFloat(51.5).toFixed(2)
-                      : parseFloat(amountGBP).toFixed(2)} */}
-                    {/* parseFloat(51.5).toFixed(2) */}
+                    <input
+                      type="text"
+                      name="deposit"
+                      value={`£${depositPrice}`}
+                      onChange={handelChangeDeposit}
+                      className=" outline-none w-full"
+                    />{" "}
                   </div>
                 </div>
               </td>
@@ -443,66 +472,61 @@ const Payment = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="font-bold">Billing Address</div>
-                    {editingAddress ? (
-                      <>
-                        <input
-                          type="text"
-                          value={editedAddress}
-                          onChange={handleAddressChange}
-                          className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-                        />
-                        <div className="text-end text-xs">
-                          <span
-                            onClick={handleCancelEdit}
-                            className="cursor-pointer text-blue-500"
-                          >
-                            Cancel
-                          </span>
-                          <span
-                            onClick={handleSaveAddress}
-                            className="cursor-pointer ml-2 text-green-500 font-bold"
-                          >
-                            Save
-                          </span>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="text-xs">{address}</div>
-                      </>
-                    )}
+                     <label className="font-bold">Billing Address</label>
+                    <input
+                      type="text"
+                      value={editedAddress}
+                      onChange={handleAddressChange}
+                      className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
+                    />
                   </div>
+                   <div></div>
+                    {/* <div className="mt-10 text-xs">
+                      <span
+                        onClick={handleCancelEdit}
+                        className="cursor-pointer text-blue-500"
+                      >
+                        Cancel
+                      </span>
+                      <span
+                        onClick={handleSaveAddress}
+                        className="cursor-pointer ml-2 text-green-500 font-bold"
+                      >
+                        Save
+                      </span>
+                    </div> */}
 
-                  <div
+                  {/* <div
                     onClick={handleEditAddress}
                     className="cursor-pointer text-end mt-3 text-xs text-blue-500"
                   >
                     Edit
+                  </div> */}
+                  <div className="flex justify-between ">
+                    <button
+                      className="cursor-pointer w-16 font-bold px-2 py-1 text-sm rounded bg-slate-400 border-1"
+                      onClick={() => router.back()}
+                      type="button"
+                    >
+                      {/* onClick={() => router.push(`/funnel/order?deposit=${depositStatus === 'true' ? 'true' : 'false'}`)}> */}
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleFormSubmit}
+                      disabled={
+                        loading ||
+                        !atmformData.cardNumber ||
+                        !formData.cardHolderName ||
+                        !formData.month ||
+                        !formData.year ||
+                        !formData.cvc
+                      }
+                      type="submit"
+                      className="cursor-pointer w-32 ml-auto font-bold px-2 py-1 text-sm rounded bg-slate-400 border-1"
+                    >
+                      {loading ? "Please wait ..." : "Make Payment"}
+                    </button>
                   </div>
-                  <button
-                    className="cursor-pointer w-16 font-bold px-2 py-1 text-sm rounded bg-slate-400 border-1"
-                    onClick={() => router.back()}
-                    type="button"
-                  >
-                    {/* onClick={() => router.push(`/funnel/order?deposit=${depositStatus === 'true' ? 'true' : 'false'}`)}> */}
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleFormSubmit}
-                    disabled={
-                      loading ||
-                      !atmformData.cardNumber ||
-                      !formData.cardHolderName ||
-                      !formData.month ||
-                      !formData.year ||
-                      !formData.cvc
-                    }
-                    type="submit"
-                    className="cursor-pointer w-32 ml-auto font-bold px-2 py-1 text-sm rounded bg-slate-400 border-1"
-                  >
-                    {loading ? "Please wait ..." : "Make Payment"}
-                  </button>
                 </form>
               </td>
             </tr>
