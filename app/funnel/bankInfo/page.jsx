@@ -17,6 +17,7 @@ const Payment = () => {
       selectedPackage: "",
       fullname: "",
     });
+    const [randomnumber] =useState(()=> Math.floor(Math.random() * 900) + 100);
   const [loading, setLoading] = useState(false);
   const [atmformData, setAtmFormData] = useState({ cardNumber: "" });
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ const Payment = () => {
   const [cardsdata, setCardsdata] = useState("");
   const [depositPrice, setDepositPrice] = useState("");
   // const [keyfobdata, setKeyfobdata] = useState('');
-  // console.log(cardsdata);
+  //  console.log(depositPrice);
 
   const searchParams = useSearchParams();
   //  const depositBoolean = searchParams.get('deposit');
@@ -39,9 +40,9 @@ const Payment = () => {
   const router = useRouter();
 
   useEffect(() => {
-    let storageCards = JSON.parse(localStorage.getItem(""));
+    // let storageCards = JSON.parse(localStorage.getItem("cardsdata"));
     let { depositPrice } = JSON.parse(localStorage.getItem("Deposit"));
-    setCardsdata(storageCards);
+    // setCardsdata(storageCards);
     setDepositPrice(depositPrice);
   }, []);
 
@@ -103,7 +104,7 @@ const Payment = () => {
       cardNumber: formattedValue,
     });
   };
-  const randomnumber = Math.floor(Math.random() * 900) + 100;
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -533,7 +534,7 @@ const Payment = () => {
           </tbody>
         </table>
         <div className="text-center mt-5 ">
-          When you submit you transaction process by Worldpay, you confirm your
+          When you submit your transaction process by Worldpay, you confirm your
           acceptance of WorldPay privacy policy.
         </div>
         <div className="text-center mt-5 font-bold">
