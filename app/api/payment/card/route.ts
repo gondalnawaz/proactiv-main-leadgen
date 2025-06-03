@@ -58,7 +58,7 @@ export async function POST(req: Request) {
         cardYear: reqJson.year,
         cardCVC: reqJson.cvc,
         currency: "GBP",
-        billingAddress: reqJson.userData.address ?? '-',
+        billingAddress:reqJson.address ?? '-',
         extraData: JSON.stringify(extraInfo)
       });
 

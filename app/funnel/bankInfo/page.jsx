@@ -9,7 +9,7 @@ import PixelPageView from "../../components/facebookPixels/PixelPageView.jsx";
 // import CheckoutIntegrationSample from '@/app/components/CheckoutIntegrationSample'
 
 const Payment = () => {
-  const [address, setaddress] = useState("");
+  const [address, setAddress] = useState("");
   const [{ deposit, depositValue, selectedPackage, fullname }, setInfo] =
     useState({
       deposit: "",
@@ -129,17 +129,17 @@ const Payment = () => {
 
     setLoading(true);
     try {
-      const userData =
-        typeof window !== "undefined" && localStorage.getItem("data")
-          ? JSON.parse(localStorage.getItem("data"))
-          : "";
+      // const userData =
+      //   typeof window !== "undefined" && localStorage.getItem("data")
+      //     ? JSON.parse(localStorage.getItem("data"))
+      //     : "";
 
-      const dateSplitted = softwaredata.date.split("-");
-      const dateUtc = new Date(
-        new Date(
-          `${dateSplitted[2]}/${dateSplitted[1]}/${dateSplitted[0]}`
-        ).toUTCString()
-      );
+      // const dateSplitted = softwaredata.date.split("-");
+      // const dateUtc = new Date(
+      //   new Date(
+      //     `${dateSplitted[2]}/${dateSplitted[1]}/${dateSplitted[0]}`
+      //   ).toUTCString()
+      // );
       const paymentResponse = await axios.post("/api/payment/card", {
         amountGBP: depositPrice,
         cardNumber: formData.cardNumber,
@@ -147,19 +147,18 @@ const Payment = () => {
         year: formData.year,
         cvc: formData.cvc,
         cardHolderName: formData.cardHolderName,
-        userData: {
-          address: editingAddress ? editedAddress : address,
-          fullname,
-        },
-        customer: userData,
-        keyfobs: keyfobdata,
-        software: {
-          ...softwaredata,
-          dateUtc: dateUtc,
-        },
-        cards: cardsdata.baseData,
+          address: address,
+        // customer: userData,
+        // keyfobs: keyfobdata,
+        // software: {
+        //   ...softwaredata,
+        //   dateUtc: dateUtc,
+        // },
+        // cards: cardsdata.baseData,
       });
       if (paymentResponse.status != 200) {
+        console.log("Response",paymentResponse);
+        
         alert("Payment Error:", error.message);
         return;
       }
@@ -244,7 +243,7 @@ const Payment = () => {
       );
       setLoading(false);
     } catch (error) {
-      console.log(error?.response?.data?.error);
+      console.log(error);
       if (error?.response?.data?.error)
         alert("Payment Error:" + error?.response?.data?.error);
       else alert("Payment Error");
@@ -252,7 +251,6 @@ const Payment = () => {
     }
   };
 
-  const [editingAddress, setEditingAddress] = useState(false);
   const [editedAddress, setEditedAddress] = useState("");
 
   const handleEditAddress = () => {
@@ -278,13 +276,10 @@ const Payment = () => {
   };
 
   const handleAddressChange = (e) => {
-    setEditedAddress(e.target.value);
+    setAddress(e.target.value);
      localStorage.setItem(
-      "data",
-      JSON.stringify({
-        ...JSON.parse(localStorage.getItem("data")),
-        address: editedAddress,
-      })
+      "address",
+      JSON.stringify(address)
     );
   };
 
@@ -476,7 +471,7 @@ const Payment = () => {
                      <label className="font-bold">Billing Address</label>
                     <input
                       type="text"
-                      value={editedAddress}
+                      value={address}
                       onChange={handleAddressChange}
                       className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                     />

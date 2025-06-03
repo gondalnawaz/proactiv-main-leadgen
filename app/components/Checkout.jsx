@@ -31,7 +31,7 @@ const Checkout = () => {
 
   const [depositSubtraction, setdepositSubtraction] = useState(false);
   const searchParams = useSearchParams();
-  console.log("Cards", cardsdata);
+  // console.log("Cards", cardsdata);
 
   useEffect(() => {
     let { needed } = JSON.parse(localStorage.getItem("cardsdata"));
@@ -347,17 +347,27 @@ const Checkout = () => {
     display: "none",
   };
 
+  console.log("Total", totalPrice);
+  console.log("Deposit", depositPrice);
+
   const handlepayment = () => {
-    if (cards === "" || keyfob === "" || totalPrice === "" || depositPrice === "" || addtionCards === "") {
-      alert("All Fields are required");
-    } else if (depositPrice > totalPrice) {
-      alert(
-        "Deposit can be higher than the total."
-      );
-    } else if (depositPrice < 51) {
+    if (
+      cards === "" ||
+      keyfob === "" ||
+      totalPrice === "" ||
+      depositPrice === "" ||
+      addtionCards === ""
+    ) {
+      alert("All fields are required.");
+      return;
+    } else if (Number(depositPrice) > Number(totalPrice)) {
+      alert(`Deposit ${depositPrice} cannot be greater than the total price ${totalPrice}.`);
+      return;
+    } else if (Number(depositPrice) < 51.50) {
       alert("The minimum deposit is £51.50");
+      return;
     } else {
-      router.push("/funnel/bankInfo")
+      router.push("/funnel/bankInfo");
     }
   };
 
