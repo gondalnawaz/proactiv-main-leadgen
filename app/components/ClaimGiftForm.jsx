@@ -28,8 +28,6 @@ const ClaimGiftForm = () => {
       alert('Complete all the fields')
     } else if (!emailRegex.test(data.email)) {
       alert('Invalid email');
-    } else if (!numberRegex.test(data.number)) {
-      alert('Invalid number')
     } else {
       localStorage.setItem('data', JSON.stringify(data));
       router.push('/funnel/spin');
