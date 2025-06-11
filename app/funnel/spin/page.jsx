@@ -6,17 +6,14 @@ import PixelPageView from '../../components/facebookPixels/PixelPageView.jsx';
 
 const PageSpinning = () => {
   const [congrats, setCongrats] = useState(true)
-  const [isReset, setIsReset] = useState(false)
   const [result, setResult] = useState('')
 
   return (<>
     <PixelPageView />
     {congrats ?
-      <Spinning setCongrats={setCongrats} setResult={setResult} setIsReset={setIsReset} />
+      <Spinning setCongrats={setCongrats} setResult={setResult} />
       :
-      isReset ?
-        <Spinning setCongrats={setCongrats} setResult={setResult} setIsReset={setIsReset} /> :
-        <Celebration result={result} />
+      <Celebration result={result} />
     }
   </>)
 }

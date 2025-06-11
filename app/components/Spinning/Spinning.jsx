@@ -1,9 +1,11 @@
 'use client'
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './Spinning.css'
 
 
 export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
+  const timeoutIdRef = useRef(null);
+
   const [deg, setDeg] = useState(0)
   const [calc, setCalc] = useState(0)
   const [prize, setPrize] = useState({ description: '', number: 0, valued: 0, days: 0, date: '' })
@@ -12,12 +14,14 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
   const handleReset = () => {
     setDeg(0)
     setClicked(false)
-    setIsReset(true)
     localStorage.removeItem('click');
     setCongrats(true)
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+    }
   }
   const handleSpin = () => {
-
     //ANTES DE LOS CAMBIOS
     // setDeg(Math.ceil(Math.random() * 100000))    
 
@@ -50,15 +54,17 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
     setClicked(true)
 
     localStorage.setItem('click', JSON.stringify('done'));
-    setTimeout(() => {
-      setCongrats(false)
-    }, 8000)
+    timeoutIdRef.current = setTimeout(() => {
+      setCongrats(false);
+      timeoutIdRef.current = null; // clear the ref
+    }, 8000);
   }
 
   useEffect(() => {
     let clickedDone = JSON.parse(localStorage.getItem('click'));
     if (clickedDone == 'done') {
       setClicked(true)
+
     }
   }, [])
 
@@ -144,7 +150,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
         {/* <p className="fontTitle">Spin The Wheel</p> */}
         {/* <p className="fontSubTitle whitespace-nowrap">To See How Many Free Months Use You Get</p>          */}
         <p className='fontTitle' style={{ paddingBottom: "0", fontWeight: '600' }}>Spin The Wheel</p>
-        
+
         <p className="font-semibold text-[1rem] px-4 mt-2 text-[#4a6bb6] desctext">
           To See How Many{" "}
           <span className="text-[#a62b2b] text-[1.2rem]"> Free </span>Months Use
@@ -386,7 +392,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                3 Months <span className="text-white">Free</span>
+                  3 Months <span className="text-white">Free</span>
                 </div>
               </div>
 
@@ -395,7 +401,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                3M FREE + 3M <span className="text-[#ff0000]">1/2</span>
+                  3M FREE + 3M <span className="text-[#ff0000]">1/2</span>
                 </div>
               </div>
               <div
@@ -403,7 +409,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[30px] h-[118px]">
-                6 Months <span className="text-white">Free</span>
+                  6 Months <span className="text-white">Free</span>
                 </div>
               </div>
               <div
@@ -411,7 +417,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                6M FREE + 6M <span className="text-[#ff0000]">1/2</span>
+                  6M FREE + 6M <span className="text-[#ff0000]">1/2</span>
                 </div>
               </div>
               <div
@@ -419,7 +425,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                9 Months <span className="text-white">Free</span>
+                  9 Months <span className="text-white">Free</span>
                 </div>
               </div>
               <div
@@ -427,7 +433,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
                 style={{ fontSize: "16px" }}
               >
                 <div className="text-center w-[15px] h-[118px]">
-                12 Months <span className="text-white">Free</span>
+                  12 Months <span className="text-white">Free</span>
                 </div>
               </div>
             </div>
@@ -443,7 +449,7 @@ export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
             !clicked ?
               <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg' onClick={handleSpin} >Spin!</button>
               :
-              <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg opacity-50' disabled >Already done!</button>
+              <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg opacity-50' disabled >Waiting</button>
           }
           <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg' onClick={handleReset} >Reset</button>
         </div>
