@@ -1,14 +1,21 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './Spinning.css'
 
 
-export const Spinning = ({ setCongrats, setResult }) => {
+export const Spinning = ({ setCongrats, setResult, setIsReset }) => {
   const [deg, setDeg] = useState(0)
   const [calc, setCalc] = useState(0)
   const [prize, setPrize] = useState({ description: '', number: 0, valued: 0, days: 0, date: '' })
   const [clicked, setClicked] = useState(false)
 
+  const handleReset = () => {
+    setDeg(0)
+    setClicked(false)
+    setIsReset(true)
+    localStorage.removeItem('click');
+    setCongrats(true)
+  }
   const handleSpin = () => {
 
     //ANTES DE LOS CAMBIOS
@@ -38,19 +45,11 @@ export const Spinning = ({ setCongrats, setResult }) => {
       setDeg(68441)
     }
 
-
-
-
-
-
-
-
     // END CONTROL SPIN RESULT
 
     setClicked(true)
 
     localStorage.setItem('click', JSON.stringify('done'));
-
     setTimeout(() => {
       setCongrats(false)
     }, 8000)
@@ -61,8 +60,6 @@ export const Spinning = ({ setCongrats, setResult }) => {
     if (clickedDone == 'done') {
       setClicked(true)
     }
-
-
   }, [])
 
 
@@ -441,19 +438,15 @@ export const Spinning = ({ setCongrats, setResult }) => {
             <div class="stoper"></div>
           </div>
         </div>
-
-        {
-          !clicked ?
-            <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg' onClick={handleSpin} >Spin!</button>
-            :
-            <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg opacity-50' disabled >Already done!</button>
-        }
-
-
-
-
-
-
+        <div className='flex gap-3'>
+          {
+            !clicked ?
+              <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg' onClick={handleSpin} >Spin!</button>
+              :
+              <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg opacity-50' disabled >Already done!</button>
+          }
+          <button className='px-6 py-2 bg-[#a52a2a] text-lg text-white rounded-lg' onClick={handleReset} >Reset</button>
+        </div>
 
       </div>
     </div>
