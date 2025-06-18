@@ -85,7 +85,6 @@ const Payment = () => {
   //     fullname,
   //   });
   //   setaddress(address);
-
   // }, []);
 
   const handleAtmInputChange = (e) => {
@@ -147,7 +146,7 @@ const Payment = () => {
         year: formData.year,
         cvc: formData.cvc,
         cardHolderName: formData.cardHolderName,
-          address: address,
+        address: address,
         // customer: userData,
         // keyfobs: keyfobdata,
         // software: {
@@ -163,80 +162,81 @@ const Payment = () => {
         return;
       }
 
-      const cTotal =
-        cardsdata.option == "full payment"
-          ? cardsdata.totaldue.toFixed(2).replace(",", ".")
-          : cardsdata.payment.toFixed(2).replace(",", ".");
-      const kfTotal = (keyfobdata.customers * keyfobdata.price * 0.5)
-        .toFixed(2)
-        .replace(",", ".");
-      const srTotal =
-        keyfobdata.addrings == "No"
-          ? "0.00"
-          : (Math.ceil(keyfobdata.customers / 100) * (6 * 0.5))
-              .toFixed(2)
-              .replace(",", ".");
-      const dueAmount = parseFloat(cTotal);
-      try {
-        await axios.post("/api/notify", {
-          userData,
-          softwareData: softwaredata,
-          cardsData: cardsdata,
-          keyFobData: keyfobdata,
-          customers: localStorage.getItem("customers"),
-          orderSummary: [
-            `${cardsdata.needed + 100} Additional Cards ${
-              cardsdata.option
-            } = ${cTotal}`,
-            `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
-            `${
-              keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
-            } Split Rings = ${srTotal}`,
-            `Total = ${(
-              parseFloat(cTotal) +
-              parseFloat(kfTotal) +
-              parseFloat(srTotal)
-            )
-              .toFixed(2)
-              .replace(",", ".")}`,
-            `Deposity (today) = ${deposit}`,
-            `Balance Due (before dispatch) = ${dueAmount}`,
-          ],
-          transactionReference: paymentResponse.data["transaction-reference"],
-        });
-      } catch (error) {
-        console.log(error);
-      }
-      try {
-        await axios.post("/api/user-notify", {
-          userData,
-          softwareData: softwaredata,
-          cardsData: cardsdata,
-          keyFobData: keyfobdata,
-          customers: localStorage.getItem("customers"),
-          orderSummary: [
-            `${cardsdata.needed + 100} Additional Cards ${
-              cardsdata.option
-            } = ${cTotal}`,
-            `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
-            `${
-              keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
-            } Split Rings = ${srTotal}`,
-            `Total = ${(
-              parseFloat(cTotal) +
-              parseFloat(kfTotal) +
-              parseFloat(srTotal)
-            )
-              .toFixed(2)
-              .replace(",", ".")}`,
-            `Deposity (today) = ${deposit}`,
-            `Balance Due (before dispatch) = ${dueAmount}`,
-          ],
-          transactionReference: paymentResponse.data["transaction-reference"],
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      // const cTotal =
+      //   cardsdata.option == "full payment"
+      //     ? cardsdata.totaldue.toFixed(2).replace(",", ".")
+      //     : cardsdata.payment.toFixed(2).replace(",", ".");
+      // const kfTotal = (keyfobdata.customers * keyfobdata.price * 0.5)
+      //   .toFixed(2)
+      //   .replace(",", ".");
+      // const srTotal =
+      //   keyfobdata.addrings == "No"
+      //     ? "0.00"
+      //     : (Math.ceil(keyfobdata.customers / 100) * (6 * 0.5))
+      //         .toFixed(2)
+      //         .replace(",", ".");
+      // const dueAmount = parseFloat(cTotal);
+
+      // try {
+      //   await axios.post("/api/notify", {
+      //     userData,
+      //     softwareData: softwaredata,
+      //     cardsData: cardsdata,
+      //     keyFobData: keyfobdata,
+      //     customers: localStorage.getItem("customers"),
+      //     orderSummary: [
+      //       `${cardsdata.needed + 100} Additional Cards ${
+      //         cardsdata.option
+      //       } = ${cTotal}`,
+      //       `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
+      //       `${
+      //         keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
+      //       } Split Rings = ${srTotal}`,
+      //       `Total = ${(
+      //         parseFloat(cTotal) +
+      //         parseFloat(kfTotal) +
+      //         parseFloat(srTotal)
+      //       )
+      //         .toFixed(2)
+      //         .replace(",", ".")}`,
+      //       `Deposity (today) = ${deposit}`,
+      //       `Balance Due (before dispatch) = ${dueAmount}`,
+      //     ],
+      //     transactionReference: paymentResponse.data["transaction-reference"],
+      //   });
+      // } catch (error) {
+      //   console.log(error);
+      // }
+      // try {
+      //   await axios.post("/api/user-notify", {
+      //     userData,
+      //     softwareData: softwaredata,
+      //     cardsData: cardsdata,
+      //     keyFobData: keyfobdata,
+      //     customers: localStorage.getItem("customers"),
+      //     orderSummary: [
+      //       `${cardsdata.needed + 100} Additional Cards ${
+      //         cardsdata.option
+      //       } = ${cTotal}`,
+      //       `${keyfobdata.customers} Keyfobs = ${kfTotal}`,
+      //       `${
+      //         keyfobdata.addrings == "No" ? 0 : keyfobdata.customers
+      //       } Split Rings = ${srTotal}`,
+      //       `Total = ${(
+      //         parseFloat(cTotal) +
+      //         parseFloat(kfTotal) +
+      //         parseFloat(srTotal)
+      //       )
+      //         .toFixed(2)
+      //         .replace(",", ".")}`,
+      //       `Deposity (today) = ${deposit}`,
+      //       `Balance Due (before dispatch) = ${dueAmount}`,
+      //     ],
+      //     transactionReference: paymentResponse.data["transaction-reference"],
+      //   });
+      // } catch (error) {
+      //   console.log(error);
+      // }
 
       router.push(
         `/funnel/thanks?status=success&reference=${paymentResponse.data["transaction-reference"]}`
@@ -246,7 +246,9 @@ const Payment = () => {
       console.log(error);
       if (error?.response?.data?.error)
         alert("Payment Error:" + error?.response?.data?.error);
-      else alert("Payment Error");
+      else {
+        alert("Payment Error", error);
+      }
       setLoading(false);
     }
   };

@@ -40,7 +40,7 @@ const handleChange = (e) => {
         percentage: parseInt(value.replace('%', '')),
       });
     }
-
+    
     {
       /* OPCION CON PORCENTAJE DENTRO DE INPUT */
     }

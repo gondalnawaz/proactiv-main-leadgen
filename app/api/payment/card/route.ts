@@ -22,48 +22,50 @@ const axiosInstance = axios.create({
   // withCredentials: true
 });
 
-const connection = process.env.NEXT_PUBLIC_DB_CONNECTION.replace(/(\(dollar\))/g, '$');
+// const connection = process.env.NEXT_PUBLIC_DB_CONNECTION.replace(/(\(dollar\))/g, '$');
+
 export async function POST(req: Request) {
   const sql = require('mssql');
   let errorMessage = '';
   try {
 
     const reqJson = await req.json();
-    await sql.connect(connection);
+    await sql.connect(process.env.NEXT_PUBLIC_DB_CONNECTION);
     try {
 
-      const { customer, software, keyfobs, cards } = reqJson;
+      const { amountGBP, cardNumber, month, year, cvc, cardHolderName, address } = reqJson;
 
-      let customerId = await getUserAsync(customer.email, customer.number);
-      if (!customerId)
-        customerId = await insertUserAsync(customer);
+      // let customerId = await getUserAsync(customer.email, customer.number);
+      // if (!customerId)
+      //   customerId = await insertUserAsync(customer);
 
       const orderId = uuidv4();
       const paymentResponse = await paymentAsync(reqJson, orderId);
+      
       if (!paymentResponse) {
         return NextResponse.json({ error: 'Payment Error' }, { status: 500 });
       }
       const { transactionReference, extraInfo } = paymentResponse;
 
-      await insertOrderAsync(orderId, customerId, customer, software);
-      await insertKeyfobsAsync(orderId, keyfobs);
-      await insertMarketingCardsAsync(orderId, cards);
+      // await insertOrderAsync(orderId, customerId, customer, software);
+      // await insertKeyfobsAsync(orderId, keyfobs);
+      // await insertMarketingCardsAsync(orderId, cards);
 
-      await insertOrderPaymentAsync(orderId, {
-        transactionReference,
-        totalAmount: parseFloat(`${reqJson.amountGBP}`),
-        cardHolderName: reqJson.cardHolderName,
-        cardNumber: reqJson.cardNumber,
-        cardMonth: reqJson.month,
-        cardYear: reqJson.year,
-        cardCVC: reqJson.cvc,
-        currency: "GBP",
-        billingAddress:reqJson.address ?? '-',
-        extraData: JSON.stringify(extraInfo)
-      });
+      // await insertOrderPaymentAsync(orderId, {
+      //   transactionReference,
+      //   totalAmount: parseFloat(`${reqJson.amountGBP}`),
+      //   cardHolderName: reqJson.cardHolderName,
+      //   cardNumber: reqJson.cardNumber,
+      //   cardMonth: reqJson.month,
+      //   cardYear: reqJson.year,
+      //   cardCVC: reqJson.cvc,
+      //   currency: "GBP",
+      //   billingAddress: address ?? '-',
+      //   extraData: JSON.stringify(extraInfo)
+      // });
 
       return NextResponse.json(
-        { customerId, 'transaction-reference': orderId },
+        { 'transaction-reference': orderId },
         { status: 200 }
       );
     } catch (error) {
@@ -86,8 +88,8 @@ export async function POST(req: Request) {
   return NextResponse.json({ error: errorMessage || 'Internal Error' }, { status: 500 });
 
 
-  async function paymentAsync(params: any, orderId) {
-    const { cardHolderName, cardNumber, month, year, cvc, amountGBP, userData } = params;
+  async function paymentAsync( params: any, orderId) {
+    const { cardHolderName, cardNumber, month, year, cvc, amountGBP, address } = params;
 
     const convertedMonth = parseInt(month);
     const convertedYear = parseInt(`${year}`.length === 4 ? year : `20${year}`);
@@ -107,7 +109,7 @@ export async function POST(req: Request) {
           cardNumber,
           cardExpiryDate: { month: convertedMonth, year: convertedYear },
           cvc,
-          billingAddress: { address1: userData.address ?? '-', postalCode: '-', city: '-', countryCode: 'GB' },
+          billingAddress: { address1: address ?? '-', postalCode: '-', city: '-', countryCode: 'GB' },
         },
       },
     };
@@ -148,6 +150,7 @@ export async function POST(req: Request) {
       };
     }
 
+    
     const settleUrl = response.data._links['payments:settle']?.href;
     if (settleUrl) {
       const settleResponse = await axiosInstance.post(settleUrl);
