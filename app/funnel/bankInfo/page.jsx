@@ -45,7 +45,6 @@ const Payment = () => {
     // setCardsdata(storageCards);
     setDepositPrice(depositPrice);
     console.log("env console", process.env.NEXT_PUBLIC_WORLDPAY_ONETIME_URL);
-    
   }, []);
 
   // useEffect(() => {
