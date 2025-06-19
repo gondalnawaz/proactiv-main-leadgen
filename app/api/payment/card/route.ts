@@ -149,7 +149,6 @@ export async function POST(req: Request) {
         }
       };
     }
-
     
     const settleUrl = response.data._links['payments:settle']?.href;
     if (settleUrl) {

@@ -44,6 +44,8 @@ const Payment = () => {
     let { depositPrice } = JSON.parse(localStorage.getItem("Deposit"));
     // setCardsdata(storageCards);
     setDepositPrice(depositPrice);
+    console.log("env console", process.env.NEXT_PUBLIC_WORLDPAY_ONETIME_URL);
+    
   }, []);
 
   // useEffect(() => {
