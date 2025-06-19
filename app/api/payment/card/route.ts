@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   try {
 
     const reqJson = await req.json();
-    await sql.connect(process.env.NEXT_PUBLIC_DB_CONNECTION);
+    await sql.connect(process.env.NEXT_PUBLIC_WORLDPAY_ONETIME_URL);
     try {
 
       const orderId = uuidv4();
